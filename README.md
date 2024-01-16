@@ -1,8 +1,5 @@
 # bitcoin-rpc-client
+### Forked from [microwww/bitcoin-rpc-client](https://github.com/microwww/bitcoin-rpc-client)
 
-#### Introduce
-java Bitcoin RPC client
-
-#### Software depend
-OkHttpClient, jsonrpc-2.0, bitcoin-0.17.1+
+Bitcoin RPC Client for Java, support Bitcoin Core 0.25+.
 
