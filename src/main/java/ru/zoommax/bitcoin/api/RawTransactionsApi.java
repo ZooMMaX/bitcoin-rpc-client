@@ -7,8 +7,18 @@ import ru.zoommax.bitcoin.model.*;
 
 import java.util.Map;
 
+/**
+ * The type Raw transactions api.
+ */
 public class RawTransactionsApi extends JsonRpcClient {
 
+    /**
+     * Instantiates a new Raw transactions api.
+     *
+     * @param username the username
+     * @param password the password
+     * @param url      the url
+     */
     public RawTransactionsApi(String username, String password, String url) {
         super(username, password, url);
     }
@@ -16,7 +26,9 @@ public class RawTransactionsApi extends JsonRpcClient {
     // combinepsbt ["psbt",...]
 
     /**
-     * @param psbt (string) A base64 string of a PSBT
+     * Combine psbt.
+     *
+     * @param psbt the psbt
      */
     @NoComplete
     public void combinePSBT(String... psbt) {
@@ -27,8 +39,11 @@ public class RawTransactionsApi extends JsonRpcClient {
     //converttopsbt "hexstring" ( permitsigdata iswitness )
 
     /**
-     * @param hexstring The hex string of a raw transaction
-     * @return
+     * Convert to psbt.
+     *
+     * @param hexstring     the hexstring
+     * @param permitsigdata the permitsigdata
+     * @param iswitness     the iswitness
      */
     @NoComplete
     public void convertToPSBT(String hexstring, boolean permitsigdata, boolean iswitness) {
@@ -36,6 +51,13 @@ public class RawTransactionsApi extends JsonRpcClient {
         this.post(json, StringValue.class);
     }
 
+    /**
+     * Create psbt string.
+     *
+     * @param input   the input
+     * @param outputs the outputs
+     * @return the string
+     */
     @NoComplete
     public String createPSBT(TransactionInput[] input, TransactionOutput[] outputs) {
         return this.createPSBT(input, outputs, 0, false);
@@ -44,11 +66,13 @@ public class RawTransactionsApi extends JsonRpcClient {
     //createpsbt [{"txid":"id","vout":n},...] [{"address":amount},{"data":"hex"},...] ( locktime ) ( replaceable )
 
     /**
-     * @param input
-     * @param outputs
-     * @param locktime
-     * @param replaceable
-     * @return hex
+     * Create psbt string.
+     *
+     * @param input       the input
+     * @param outputs     the outputs
+     * @param locktime    the locktime
+     * @param replaceable the replaceable
+     * @return the string
      */
     @NoComplete
     public String createPSBT(TransactionInput[] input, TransactionOutput[] outputs, int locktime, boolean replaceable) {
@@ -60,8 +84,10 @@ public class RawTransactionsApi extends JsonRpcClient {
     //decodepsbt "psbt"
 
     /**
-     * @param psbt The PSBT base64 string
-     * @return
+     * Decode psbt string.
+     *
+     * @param psbt the psbt
+     * @return the string
      */
     @NoComplete
     public String decodePSBT(String psbt) {
@@ -69,12 +95,25 @@ public class RawTransactionsApi extends JsonRpcClient {
         return this.post(json, StringValue.class);
     }
 
-    //finalizepsbt "psbt" ( extract )
+    /**
+     * Finalize psbt string.
+     *
+     * @param psbt the psbt
+     * @return the string
+     */
+//finalizepsbt "psbt" ( extract )
     @NoComplete
     public String finalizePSBT(String psbt) {
         return this.finalizePSBT(psbt, null);
     }
 
+    /**
+     * Finalize psbt string.
+     *
+     * @param psbt    the psbt
+     * @param extract the extract
+     * @return the string
+     */
     public String finalizePSBT(String psbt, String extract) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("finalizepsbt").appendParams(psbt).appendParams(extract).getJson();
         return this.post(json, StringValue.class);
@@ -83,8 +122,10 @@ public class RawTransactionsApi extends JsonRpcClient {
     // combinerawtransaction ["hexstring",...]
 
     /**
-     * @param hexstring (string) A transaction hexstring
-     * @return hex-encoded raw transaction
+     * Combine raw transaction string.
+     *
+     * @param hexstring the hexstring
+     * @return the string
      */
     public String combineRawTransaction(String... hexstring) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("combinerawtransaction").appendParams(hexstring).getJson();
@@ -92,9 +133,11 @@ public class RawTransactionsApi extends JsonRpcClient {
     }
 
     /**
-     * @param input
-     * @param outputs
-     * @return base64hex
+     * Create raw transaction string.
+     *
+     * @param input   the input
+     * @param outputs the outputs
+     * @return the string
      */
     public String createRawTransaction(TransactionInput[] input, TransactionOutput[] outputs) {
         return createRawTransaction(input, outputs, 0, false);
@@ -103,11 +146,13 @@ public class RawTransactionsApi extends JsonRpcClient {
     //createrawtransaction [{"txid":"id","vout":n},...] [{"address":amount},{"data":"hex"},...] ( locktime ) ( replaceable )
 
     /**
-     * @param input
-     * @param outputs
-     * @param locktime
-     * @param replaceable
-     * @return hex
+     * Create raw transaction string.
+     *
+     * @param input       the input
+     * @param outputs     the outputs
+     * @param locktime    the locktime
+     * @param replaceable the replaceable
+     * @return the string
      */
     public String createRawTransaction(TransactionInput[] input, TransactionOutput[] outputs, int locktime, boolean replaceable) {
         Map<String, ?>[] out = TransactionOutput.toSingleMaps(outputs);
@@ -118,60 +163,122 @@ public class RawTransactionsApi extends JsonRpcClient {
         return this.post(json, StringValue.class);
     }
 
-    //decoderawtransaction "hexstring" ( iswitness )
+    /**
+     * Decode raw transaction raw transaction.
+     *
+     * @param hexstring the hexstring
+     * @param iswitness the iswitness
+     * @return the raw transaction
+     */
+//decoderawtransaction "hexstring" ( iswitness )
     public RawTransaction decodeRawTransaction(String hexstring, boolean iswitness) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("decoderawtransaction").appendParams(hexstring).appendParams(iswitness).getJson();
         return this.post(json, RawTransaction.Result.class);
     }
 
-    //decodescript "hexstring"
+    /**
+     * Decode script script pub key.
+     *
+     * @param hexstring the hexstring
+     * @return the script pub key
+     */
+//decodescript "hexstring"
     public ScriptPubKey decodeScript(String hexstring) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("decodescript").appendParams(hexstring).getJson();
         return this.post(json, ScriptPubKey.Result.class);
     }
 
-    //fundrawtransaction "hexstring" ( options iswitness )
+    /**
+     * Fund raw transaction.
+     *
+     * @param hexstring the hexstring
+     */
+//fundrawtransaction "hexstring" ( options iswitness )
     public void fundRawTransaction(String hexstring) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hexstring).getJson();
         this.post(json, StringValue.class);
     }
 
-    //getrawtransaction "txid" ( verbose "blockhash" )
+    /**
+     * Gets raw transaction.
+     *
+     * @param txid the txid
+     * @return the raw transaction
+     */
+//getrawtransaction "txid" ( verbose "blockhash" )
     public RawTransaction getRawTransaction(String txid) {
         boolean verbose = true;
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("getrawtransaction").appendParams(txid).appendParams(verbose).getJson();
         return this.post(json, RawTransaction.Result.class);
     }
 
+    /**
+     * Gets raw transaction hex.
+     *
+     * @param txid the txid
+     * @return the raw transaction hex
+     */
     public String getRawTransactionHex(String txid) {
         boolean verbose = false;
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("getrawtransaction").appendParams(txid).appendParams(verbose).getJson();
         return this.post(json, StringValue.class);
     }
 
-    //sendrawtransaction "hexstring" ( allowhighfees )
+    /**
+     * Send raw transaction string.
+     *
+     * @param hexstring the hexstring
+     * @return the string
+     */
+//sendrawtransaction "hexstring" ( allowhighfees )
     public String sendRawTransaction(String hexstring) {
         return this.sendRawTransaction(hexstring, false);
     }
 
+    /**
+     * Send raw transaction string.
+     *
+     * @param hexstring     the hexstring
+     * @param allowhighfees the allowhighfees
+     * @return the string
+     */
     public String sendRawTransaction(String hexstring, boolean allowhighfees) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("sendrawtransaction").appendParams(hexstring).appendParams(allowhighfees).getJson();
         return this.post(json, StringValue.class);
     }
 
-    //signrawtransaction "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
+    /**
+     * Sign raw transaction transaction sign.
+     *
+     * @param hexstring the hexstring
+     * @return the transaction sign
+     */
+//signrawtransaction "hexstring" ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] ["privatekey1",...] sighashtype )
     public TransactionSign signRawTransaction(String hexstring) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("signrawtransaction").appendParams(hexstring).getJson();
         return this.post(json, TransactionSign.Result.class);
     }
 
-    //signrawtransactionwithkey "hexstring" ["privatekey1",...] ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] sighashtype )
+    /**
+     * Sign raw transaction with key string.
+     *
+     * @param hexstring the hexstring
+     * @param privkeys  the privkeys
+     * @return the string
+     */
+//signrawtransactionwithkey "hexstring" ["privatekey1",...] ( [{"txid":"id","vout":n,"scriptPubKey":"hex","redeemScript":"hex"},...] sighashtype )
     public String signRawTransactionWithKey(String hexstring, String... privkeys) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("signrawtransactionwithkey").appendParams(hexstring).appendParams(privkeys).getJson();
         return this.post(json, StringValue.class);
     }
 
-    //testmempoolaccept ["rawtxs"] ( allowhighfees )
+    /**
+     * Test mem pool accept pool accept.
+     *
+     * @param rawtxs the rawtxs
+     * @return the pool accept
+     */
+//testmempoolaccept ["rawtxs"] ( allowhighfees )
     public PoolAccept testMemPoolAccept(String rawtxs) {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("testmempoolaccept").appendParams(new String[]{rawtxs}).getJson();
         return this.post(json, PoolAccept.Result.class)[0];
