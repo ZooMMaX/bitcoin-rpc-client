@@ -320,15 +320,15 @@ public class BlockChainApi extends JsonRpcClient {
      */
     public static enum ScanAction {
         /**
-         * Start scan action.
+         * The Start.
          */
         start,
         /**
-         * Abort scan action.
+         * The Abort.
          */
         abort,
         /**
-         * Status scan action.
+         * The Status.
          */
         status
     }

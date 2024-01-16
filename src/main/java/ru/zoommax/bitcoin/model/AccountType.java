@@ -5,15 +5,15 @@ package ru.zoommax.bitcoin.model;
  */
 public enum AccountType {
     /**
-     * Legacy account type.
+     * The Legacy.
      */
     legacy("legacy"),
     /**
-     * P 2 sh segwit account type.
+     * The P 2 sh segwit.
      */
     p2shSegwit("p2sh-segwit"),
     /**
-     * Bech 32 account type.
+     * The Bech 32.
      */
     bech32("bech32");
     /**

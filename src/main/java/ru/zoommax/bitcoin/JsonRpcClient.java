@@ -8,29 +8,82 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * The type Json rpc client.
+ */
 public class JsonRpcClient {
+    /**
+     * The constant mapper.
+     */
     private static final ObjectMapper mapper = new ObjectMapper(); //.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    /**
+     * The constant logger.
+     */
     private static Logger logger = LoggerFactory.getLogger(JsonRpcClient.class);
+    /**
+     * The constant okHttpClient.
+     */
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("192.168.1.32", 3128)))
             .build();
+    /**
+     * The constant inc.
+     */
     private static transient AtomicInteger inc = new AtomicInteger(0);
 
+    /**
+     * The Client.
+     */
     protected OkHttpClient client = okHttpClient;
+    /**
+     * The Username.
+     */
     protected String username;
+    /**
+     * The Password.
+     */
     protected String password;
+    /**
+     * The Url.
+     */
     protected String url;
 
+    /**
+     * Instantiates a new Json rpc client.
+     *
+     * @param username the username
+     * @param password the password
+     * @param url      the url
+     */
     public JsonRpcClient(String username, String password, String url) {
         this.username = username;
         this.password = password;
         this.url = url;
     }
 
+    /**
+     * No 200 error u.
+     *
+     * @param <U>      the type parameter
+     * @param <T>      the type parameter
+     * @param request  the request
+     * @param response the response
+     * @param result   the result
+     * @return the u
+     */
     protected <U, T extends JsonRpcResult<U>> U no200error(Request request, Response response, Class<T> result) {
         throw new HttpException(response, "Response Not 2xx ERROR, [%s,%s]", response.code(), response.message());
     }
 
+    /**
+     * Post u.
+     *
+     * @param <U>    the type parameter
+     * @param <T>    the type parameter
+     * @param json   the json
+     * @param result the result
+     * @return the u
+     */
     public <U, T extends JsonRpcResult<U>> U post(JsonRpc20 json, Class<T> result) {
         if (json.getId() <= 0) {
             json.setId(this.getId());
@@ -64,11 +117,22 @@ public class JsonRpcClient {
         }
     }
 
+    /**
+     * Sets ok http client.
+     *
+     * @param client the client
+     * @return the ok http client
+     */
     public JsonRpcClient setOkHttpClient(OkHttpClient client) {
         this.client = client;
         return this;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         int ii = inc.addAndGet(1);
         if (ii >= 9_999) {
