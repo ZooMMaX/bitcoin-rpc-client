@@ -6,7 +6,7 @@
 
     <groupId>ru.zoommax</groupId>
     <artifactId>rpc-bitcoin-25.0</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>bitcoin-rpc-client</name>
     <url>https://github.com/ZooMMaX/bitcoin-rpc-client</url>
     <description>BITCOIN rpc client</description>
