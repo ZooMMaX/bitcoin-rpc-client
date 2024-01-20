@@ -8,6 +8,8 @@ import ru.zoommax.bitcoin.bitcore25.model.LongValue;
 import ru.zoommax.bitcoin.bitcore25.model.StringValue;
 import ru.zoommax.bitcoin.bitcore25.model.blockchain.chaintips.ChainTips;
 import ru.zoommax.bitcoin.bitcore25.model.blockchain.deploymentinfo.DeploymentInfo;
+import ru.zoommax.bitcoin.bitcore25.model.blockchain.mempoolancestorsdescendants.MempoolAncestors;
+import ru.zoommax.bitcoin.bitcore25.model.blockchain.mempoolancestorsdescendants.MempoolDescendants;
 
 /**
  * The type Blockchain api.
@@ -166,5 +168,35 @@ public class BlockChainApi extends JsonRpcClient {
      */
     public double getDifficulty() {
         return this.post(new JsonRpc20.Builder().setMethod("getdifficulty").getJson(), DoubleValue.class);
+    }
+
+    /**
+     * Get mempool ancestors.
+     * @param txid the txid
+     * @param verbose the verbose
+     * @return {@link MempoolAncestors}
+     */
+    public Object getMempoolAncestors(String txid, boolean verbose) {
+        JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getmempoolancestors").appendParams(txid);
+        if (verbose) {
+            builder.appendParams(verbose);
+            return this.post(builder.getJson(), MempoolAncestors.ResultHashMap.class);
+        }
+        return this.post(builder.getJson(), MempoolAncestors.ResultArray.class);
+    }
+
+    /**
+     * Get mempool descendants.
+     * @param txid the txid
+     * @param verbose the verbose
+     * @return {@link MempoolDescendants}
+     */
+    public Object getMempoolDescendants(String txid, boolean verbose) {
+        JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getmempooldescendants").appendParams(txid);
+        if (verbose) {
+            builder.appendParams(verbose);
+            return this.post(builder.getJson(), MempoolDescendants.ResultHashMap.class);
+        }
+        return this.post(builder.getJson(), MempoolDescendants.ResultArray.class);
     }
 }

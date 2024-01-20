@@ -73,4 +73,14 @@ public class BlockChainApiTests {
     public void getDifficulty() {
         api.getDifficulty();
     }
+
+    @Test
+    public void getMempoolAncestors() {
+        api.getMempoolAncestors("1008a8251287b08e8185fc6e5e64d17ece3bb3a01b8454c51b4b8dd38bb28de4", true);
+    }
+
+    @Test
+    public void getMempoolDescendants(){
+        api.getMempoolDescendants("1008a8251287b08e8185fc6e5e64d17ece3bb3a01b8454c51b4b8dd38bb28de4", true);
+    }
 }
