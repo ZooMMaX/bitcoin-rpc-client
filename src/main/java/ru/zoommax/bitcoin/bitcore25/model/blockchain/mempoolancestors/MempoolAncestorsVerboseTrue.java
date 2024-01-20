@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.blockchain.mpoolancestors;
+package ru.zoommax.bitcoin.bitcore25.model.blockchain.mempoolancestors;
 
 import lombok.Getter;
 import lombok.Setter;
