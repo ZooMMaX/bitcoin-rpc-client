@@ -25,3 +25,7 @@ hs_err_pid*
 #json files
 *.json
 
+.settings/
+.project
+.classpath
+target/
