@@ -2,9 +2,10 @@ package ru.zoommax.bitcoin.old.api;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
-import ru.zoommax.bitcoin.bitcore25.model.ArrayValue;
-import ru.zoommax.bitcoin.bitcore25.model.LongValue;
-import ru.zoommax.bitcoin.bitcore25.model.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.ArrayValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.BooleanValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 import ru.zoommax.bitcoin.old.model.*;
 
 /**
@@ -39,15 +40,15 @@ public class NetworkApi extends JsonRpcClient {
      */
     public static enum Options {
         /**
-         * Add options.
+         * The Add.
          */
         add,
         /**
-         * Remove options.
+         * The Remove.
          */
         remove,
         /**
-         * Onetry options.
+         * The Onetry.
          */
         onetry
     }
@@ -191,11 +192,11 @@ public class NetworkApi extends JsonRpcClient {
      */
     public static enum BanOptions {
         /**
-         * Add ban options.
+         * The Add.
          */
         add,
         /**
-         * Remove ban options.
+         * The Remove.
          */
         remove
     }

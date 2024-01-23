@@ -3,7 +3,7 @@ package ru.zoommax.bitcoin.old.api;
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.annotation.NoComplete;
-import ru.zoommax.bitcoin.bitcore25.model.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 import ru.zoommax.bitcoin.old.model.*;
 
 import java.util.Map;

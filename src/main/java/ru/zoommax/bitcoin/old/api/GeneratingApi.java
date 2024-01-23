@@ -2,7 +2,7 @@ package ru.zoommax.bitcoin.old.api;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
-import ru.zoommax.bitcoin.bitcore25.model.ArrayValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.ArrayValue;
 
 /**
  * The type Generating api.

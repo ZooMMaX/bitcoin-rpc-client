@@ -5,24 +5,19 @@ import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
 /**
- * The type Block filter.
+ * The type Save mempool.
  */
 @Getter
 @Setter
-public class BlockFilter {
-
+public class SaveMempool {
     /**
      * The type Result.
      */
-    public static class Result extends JsonRpcResult<BlockFilter> {
+    public static class Result extends JsonRpcResult<SaveMempool> {
     }
 
     /**
-     * The Filter.
+     * The Filename.
      */
-    private String filter;
-    /**
-     * The Header.
-     */
-    private String header;
+    private String filename;
 }

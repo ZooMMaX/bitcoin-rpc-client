@@ -4,10 +4,7 @@ import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.JsonRpcResult;
 import ru.zoommax.bitcoin.annotation.NoComplete;
-import ru.zoommax.bitcoin.bitcore25.model.ArrayValue;
-import ru.zoommax.bitcoin.bitcore25.model.BigDecimalValue;
-import ru.zoommax.bitcoin.bitcore25.model.MapValue;
-import ru.zoommax.bitcoin.bitcore25.model.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.*;
 import ru.zoommax.bitcoin.old.model.*;
 
 import java.math.BigDecimal;
@@ -286,6 +283,11 @@ public class WalletApi extends JsonRpcClient {
         return this.post(json, BigDecimalValue.class).doubleValue();
     }
 
+    /**
+     * Gets balances.
+     *
+     * @return the balances
+     */
     public double getBalances() {
         JsonRpc20 json = new JsonRpc20.Builder().setMethod("getbalances").getJson();
         return this.post(json, BigDecimalValue.class).doubleValue();

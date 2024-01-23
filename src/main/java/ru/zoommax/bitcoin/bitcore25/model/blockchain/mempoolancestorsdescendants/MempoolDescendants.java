@@ -3,15 +3,25 @@ package ru.zoommax.bitcoin.bitcore25.model.blockchain.mempoolancestorsdescendant
 import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
+import ru.zoommax.bitcoin.bitcore25.model.useany.Transaction;
 
 import java.util.HashMap;
 
+/**
+ * The type Mempool descendants.
+ */
 @Getter
 @Setter
 public class MempoolDescendants {
+    /**
+     * The type Result array.
+     */
     public static class ResultArray extends JsonRpcResult<String[]> {
     }
 
+    /**
+     * The type Result hash map.
+     */
     public static class ResultHashMap extends JsonRpcResult<HashMap<String, Transaction>> {
     }
 }

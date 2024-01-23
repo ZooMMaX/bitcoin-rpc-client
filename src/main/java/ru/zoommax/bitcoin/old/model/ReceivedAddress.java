@@ -1,6 +1,6 @@
 package ru.zoommax.bitcoin.old.model;
 
-import ru.zoommax.bitcoin.bitcore25.model.ArrayValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.ArrayValue;
 
 /**
  * The type Received address.

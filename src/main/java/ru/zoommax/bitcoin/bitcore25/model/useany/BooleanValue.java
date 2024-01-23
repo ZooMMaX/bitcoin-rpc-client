@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.old.model;
+package ru.zoommax.bitcoin.bitcore25.model.useany;
 
 import ru.zoommax.bitcoin.JsonRpcResult;
 

@@ -2,9 +2,9 @@ package ru.zoommax.bitcoin.old.api;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
-import ru.zoommax.bitcoin.bitcore25.model.BigDecimalValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.BigDecimalValue;
 import ru.zoommax.bitcoin.old.model.MiningInfo;
-import ru.zoommax.bitcoin.bitcore25.model.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
 import java.math.BigDecimal;
 

@@ -207,15 +207,15 @@ public class BumpFee {
      */
     public enum EstimateMode {
         /**
-         * Unset estimate mode.
+         * The Unset.
          */
         UNSET,
         /**
-         * Economical estimate mode.
+         * The Economical.
          */
         ECONOMICAL,
         /**
-         * Conservative estimate mode.
+         * The Conservative.
          */
         CONSERVATIVE
     }

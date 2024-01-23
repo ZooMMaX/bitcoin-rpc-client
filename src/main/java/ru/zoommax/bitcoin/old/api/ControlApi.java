@@ -4,7 +4,7 @@ import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.old.model.LoggerStatus;
 import ru.zoommax.bitcoin.old.model.MemoryInfo;
-import ru.zoommax.bitcoin.bitcore25.model.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
 /**
  * The type Control api.
@@ -38,11 +38,11 @@ public class ControlApi extends JsonRpcClient {
      */
     public static enum MemoryInfoModel {
         /**
-         * Stats memory info model.
+         * The Stats.
          */
         stats,
         /**
-         * Mallocinfo memory info model.
+         * The Mallocinfo.
          */
         mallocinfo
     }
