@@ -355,7 +355,7 @@ public class BlockChainApi extends JsonRpcClient {
 	 * Gets tx out set info.
 	 *
 	 * @param hash_type      the hash type
-	 * @param hash_or_height the hash or height
+	 * @param hashOrHeight the hash or height
 	 * @param use_index      the use index
 	 * @return the tx out set info
 	 */
