@@ -82,11 +82,13 @@ public class JsonRpcClient {
             try {
                 String resp = response.body().string();
                 String doc = new ObjectMapper().readTree(resp).get("error").get("message").asText();
-                if (Desktop.isDesktopSupported()) {
-                    Thread thread = new OpenDocs(doc);
-                    thread.start();
-                    thread.join();
-                }
+                //if (!doc.) {
+                    if (Desktop.isDesktopSupported()) {
+                        Thread thread = new OpenDocs(doc);
+                        thread.start();
+                        thread.join();
+                    }
+                //}
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }

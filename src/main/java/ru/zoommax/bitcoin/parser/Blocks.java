@@ -12,16 +12,17 @@ public class Blocks {
 
     public Blocks(String raw) {
         String[] lines = raw.split("\n");
+        System.out.println(Arrays.toString(lines));
         String[] parts = {"","","",""};
         int resultIndex = 0;
         int argumentsIndex = 0;
         int exampleIndex = 0;
         for (int i = 0; i < lines.length; i++) {
-        if (lines[i].startsWith("Arguments") && argumentsIndex == 0) {
-                argumentsIndex = i-1;
+            if (lines[i].startsWith("Arguments") && argumentsIndex == 0) {
+                argumentsIndex = i - 1;
             }
             if (lines[i].startsWith("Result") && resultIndex == 0) {
-                resultIndex = i-1;
+                resultIndex = i - 1;
             }
             if (lines[i].startsWith("Example")) {
                 exampleIndex = i;
@@ -41,6 +42,10 @@ public class Blocks {
             if (i > exampleIndex) {
                 parts[3] = parts[3] + lines[i]+ "\n";
             }
+        }
+
+        if (resultIndex == 0 && argumentsIndex == 0 && exampleIndex == 0) {
+            parts[0] = raw;
         }
 
         this.description = parts[0].trim();
