@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.blockchain.txout;
+package ru.zoommax.bitcoin.bitcore25.model.useany;
 
 import lombok.Getter;
 import lombok.Setter;
