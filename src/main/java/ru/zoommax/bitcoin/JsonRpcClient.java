@@ -4,8 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.zoommax.bitcoin.annotation.ErrorBody;
+import ru.zoommax.bitcoin.parser.OpenDocs;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -72,6 +78,19 @@ public class JsonRpcClient {
      * @return the u
      */
     protected <U, T extends JsonRpcResult<U>> U no200error(Request request, Response response, Class<T> result) {
+        if (this.getClass().isAnnotationPresent(ErrorBody.class)) {
+            try {
+                String resp = response.body().string();
+                String doc = new ObjectMapper().readTree(resp).get("error").get("message").asText();
+                if (Desktop.isDesktopSupported()) {
+                    Thread thread = new OpenDocs(doc);
+                    thread.start();
+                    thread.join();
+                }
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         throw new HttpException(response, "Response Not 2xx ERROR, [%s,%s]", response.code(), response.message());
     }
 

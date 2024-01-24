@@ -2,13 +2,20 @@ package ru.zoommax.bitcoin.bitcore25.api.mining;
 
 import org.jetbrains.annotations.Nullable;
 
+import ru.zoommax.bitcoin.HttpException;
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
+import ru.zoommax.bitcoin.annotation.ErrorBody;
+import ru.zoommax.bitcoin.annotation.NoComplete;
 import ru.zoommax.bitcoin.bitcore25.model.mining.MiningInfo;
+import ru.zoommax.bitcoin.bitcore25.model.mining.blocktemplate.BlockTemplate;
 import ru.zoommax.bitcoin.bitcore25.model.useany.BooleanValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
+import java.nio.charset.StandardCharsets;
+
+@ErrorBody
 public class MiningApi extends JsonRpcClient {
 
 	public MiningApi(String username, String password, String url){
@@ -17,7 +24,11 @@ public class MiningApi extends JsonRpcClient {
 
 	public String getBlockTemplate() {
 		return this.post(new JsonRpc20.Builder().setMethod("getblocktemplate").getJson(), StringValue.class);
-	} // TODO extend method;
+	}
+
+	public BlockTemplate getBlockTemplate(String template_request) {
+		return this.post(new JsonRpc20.Builder().setMethod("getblocktemplate").appendParams(template_request).getJson(), BlockTemplate.Result.class);
+	}
 
 	public MiningInfo getMiningInfo() {
 		return this.post(new JsonRpc20.Builder().setMethod("getmininginfo").getJson(), MiningInfo.Result.class);
