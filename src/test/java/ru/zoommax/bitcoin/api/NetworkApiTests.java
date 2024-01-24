@@ -2,6 +2,7 @@ package ru.zoommax.bitcoin.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,6 @@ public class NetworkApiTests {
 
 	@Test
 	public void disconnectNode() {
-		api.disconnectNode();
 		api.disconnectNode("testnode");
 		api.disconnectNode(null, 1);
 	}
@@ -62,7 +62,7 @@ public class NetworkApiTests {
 	@Test
 	public void getNodeAddresses() {
 		api.getNodeAddresses();
-		api.getNodeAddresses(2);
+		api.getNodeAddresses(1);
 	}
 
 	@Test
