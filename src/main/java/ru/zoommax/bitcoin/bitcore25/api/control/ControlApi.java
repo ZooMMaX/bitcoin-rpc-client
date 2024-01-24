@@ -17,6 +17,10 @@ public class ControlApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("getmemoryinfo").getJson(), MemoryInfo.Result.class);
 	}
 
+	public String getMemoryInfo(String mode) {
+		return this.post(new JsonRpc20.Builder().setMethod("getmemoryinfo").appendParams(mode).getJson(), StringValue.class);
+	}
+
 	public MemoryInfo getRpcInfo() {
 		return null; // TODO
 	}
