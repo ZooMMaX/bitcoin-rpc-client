@@ -2,6 +2,7 @@ package ru.zoommax.bitcoin.bitcore25.api.network;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
+import ru.zoommax.bitcoin.annotation.ErrorBody;
 import ru.zoommax.bitcoin.bitcore25.model.network.ListBanned;
 import ru.zoommax.bitcoin.bitcore25.model.network.NodeAddress;
 import ru.zoommax.bitcoin.bitcore25.model.network.PeerInfo;
@@ -10,6 +11,7 @@ import ru.zoommax.bitcoin.bitcore25.model.network.nettotals.NetTraffic;
 import ru.zoommax.bitcoin.bitcore25.model.network.networkinfo.NetworkInfo;
 import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
 
+@ErrorBody
 public class NetworkApi extends JsonRpcClient {
 
 	public NetworkApi(String username, String password, String url) {

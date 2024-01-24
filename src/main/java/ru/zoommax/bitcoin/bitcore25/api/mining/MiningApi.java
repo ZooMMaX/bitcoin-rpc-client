@@ -2,18 +2,14 @@ package ru.zoommax.bitcoin.bitcore25.api.mining;
 
 import org.jetbrains.annotations.Nullable;
 
-import ru.zoommax.bitcoin.HttpException;
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.annotation.ErrorBody;
-import ru.zoommax.bitcoin.annotation.NoComplete;
 import ru.zoommax.bitcoin.bitcore25.model.mining.MiningInfo;
 import ru.zoommax.bitcoin.bitcore25.model.mining.blocktemplate.BlockTemplate;
 import ru.zoommax.bitcoin.bitcore25.model.useany.BooleanValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
-
-import java.nio.charset.StandardCharsets;
 
 @ErrorBody
 public class MiningApi extends JsonRpcClient {

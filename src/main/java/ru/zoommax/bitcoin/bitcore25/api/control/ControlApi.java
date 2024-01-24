@@ -2,11 +2,13 @@ package ru.zoommax.bitcoin.bitcore25.api.control;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
+import ru.zoommax.bitcoin.annotation.ErrorBody;
 import ru.zoommax.bitcoin.bitcore25.model.control.LoggerStatus;
 import ru.zoommax.bitcoin.bitcore25.model.control.memoryinfo.MemoryInfo;
 import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
+@ErrorBody
 public class ControlApi extends JsonRpcClient {
 
 	public ControlApi(String username, String password, String url){

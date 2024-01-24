@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
+import ru.zoommax.bitcoin.annotation.ErrorBody;
 import ru.zoommax.bitcoin.bitcore25.model.blockchain.Block;
 import ru.zoommax.bitcoin.bitcore25.model.blockchain.BlockChainInfo;
 import ru.zoommax.bitcoin.bitcore25.model.blockchain.BlockFilter;
@@ -36,6 +37,7 @@ import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 /**
  * The type Block chain api.
  */
+@ErrorBody
 public class BlockChainApi extends JsonRpcClient {
 	/**
 	 * Instantiates a new Block chain api.
