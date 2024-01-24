@@ -2,6 +2,8 @@ package ru.zoommax.bitcoin.bitcore25.api.blockchain;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ru.zoommax.bitcoin.JsonRpc20;
@@ -90,12 +92,12 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param filterType the filter type
 	 * @return the block filter
 	 */
+	public BlockFilter getBlockFilter(String blockHash) {
+		return this.post(new JsonRpc20.Builder().setMethod("getblockfilter").appendParams(blockHash).getJson(), BlockFilter.Result.class);
+	}
+
 	public BlockFilter getBlockFilter(String blockHash, String filterType) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getblockfilter").appendParams(blockHash);
-		if (filterType != null && !filterType.isEmpty()) {
-			builder.appendParams(filterType);
-		}
-		return this.post(builder.getJson(), BlockFilter.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("getblockfilter").appendParams(blockHash).appendParams(filterType).getJson(), BlockFilter.Result.class);
 	}
 
 	/**
@@ -105,10 +107,7 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param peerId    the peer id
 	 */
 	public void getBlockFromPeer(String blockHash, long peerId) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getblockfrompeer")
-				.appendParams(blockHash)
-				.appendParams(peerId);
-		this.post(builder.getJson(), StringValue.class);
+		this.post(new JsonRpc20.Builder().setMethod("getblockfrompeer").appendParams(blockHash).appendParams(peerId).getJson(), StringValue.class);
 	}
 
 	/**
@@ -128,12 +127,25 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param verbose   the verbose
 	 * @return the block header
 	 */
-	public BlockHeader getBlockHeader(String blockHash, boolean verbose) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash);
-		if (verbose) {
-			builder.appendParams(verbose);
+	public BlockHeader getBlockHeader(String blockHash) {
+		return this.post(new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash).getJson(), BlockHeader.Result.class);
+	}
+
+	public Object getBlockHeader(String blockHash, boolean verbose) { // if verbose true - returns BlockHeader, false - String
+		if (verbose) return getBlockHeader(blockHash);
+		return this.post(new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash).appendParams(verbose).getJson(), StringValue.class);
+	}
+
+	private JsonRpc20.Builder blockStats(String hashOrHeight) {
+		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getblockstats");
+
+		try {
+			builder.appendParams(Double.valueOf(hashOrHeight).longValue());
+		} catch(final NumberFormatException e) {
+			builder.appendParams(hashOrHeight);
 		}
-		return this.post(builder.getJson(), BlockHeader.Result.class);
+
+		return builder;
 	}
 
 	/**
@@ -143,17 +155,12 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param statsJsonArray the stats json array
 	 * @return the block stats
 	 */
-	public BlockStats getBlockStats(Object hashOrHeight, String statsJsonArray) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getblockstats");
-		if (hashOrHeight instanceof String) {
-			builder.appendParams(hashOrHeight);
-		} else if (hashOrHeight instanceof Long) {
-			builder.appendParams(hashOrHeight);
-		}
-		if (statsJsonArray != null && !statsJsonArray.isEmpty()) {
-			builder.appendParams(statsJsonArray);
-		}
-		return this.post(builder.getJson(), BlockStats.Result.class);
+	public BlockStats getBlockStats(String hashOrHeight) {
+		return this.post(blockStats(hashOrHeight).getJson(), BlockStats.Result.class);
+	}
+
+	public BlockStats getBlockStats(String hashOrHeight, String statsJsonArray) {
+		return this.post(blockStats(hashOrHeight).appendParams(statsJsonArray).getJson(), BlockStats.Result.class);
 	}
 
 	/**
@@ -165,6 +172,18 @@ public class BlockChainApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("getchaintips").getJson(), ChainTips.Result.class);
 	}
 
+	public ChainTxStats getChainTxStats() {
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").getJson(), ChainTxStats.Result.class);
+	}
+
+	public ChainTxStats getChainTxStats(long nBlocks) {
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(nBlocks).getJson(), ChainTxStats.Result.class);
+	}
+
+	public ChainTxStats getChainTxStats(String blockHash) {
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(1 /* HERE NEED TO SET DEFAULT VALUE! */).appendParams(blockHash).getJson(), ChainTxStats.Result.class);
+	}
+
 	/**
 	 * Gets chain tx stats.
 	 *
@@ -173,11 +192,11 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the chain tx stats
 	 */
 	public ChainTxStats getChainTxStats(long nBlocks, String blockHash) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(nBlocks);
-		if (blockHash != null && !blockHash.isEmpty()) {
-			builder.appendParams(blockHash);
-		}
-		return this.post(builder.getJson(), ChainTxStats.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(nBlocks).appendParams(blockHash).getJson(), ChainTxStats.Result.class);
+	}
+
+	public DeploymentInfo getDeploymentInfo() {
+		return this.post(new JsonRpc20.Builder().setMethod("getdeploymentinfo").getJson(), DeploymentInfo.Result.class);
 	}
 
 	/**
@@ -187,11 +206,7 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the deployment info
 	 */
 	public DeploymentInfo getDeploymentInfo(String blockHash) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getdeploymentinfo");
-		if (blockHash != null && !blockHash.isEmpty()) {
-			builder.appendParams(blockHash);
-		}
-		return this.post(builder.getJson(), DeploymentInfo.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("getdeploymentinfo").appendParams(blockHash).getJson(), DeploymentInfo.Result.class);
 	}
 
 	/**
@@ -201,6 +216,10 @@ public class BlockChainApi extends JsonRpcClient {
 	 */
 	public double getDifficulty() {
 		return this.post(new JsonRpc20.Builder().setMethod("getdifficulty").getJson(), DoubleValue.class);
+	}
+
+	public String[] getMempoolAncestors(String txid) {
+		return this.post(new JsonRpc20.Builder().setMethod("getmempoolancestors").appendParams(txid).getJson(), MempoolAncestors.ResultArray.class);
 	}
 
 	/**
@@ -217,6 +236,9 @@ public class BlockChainApi extends JsonRpcClient {
 			return this.post(builder.getJson(), MempoolAncestors.ResultHashMap.class);
 		}
 		return this.post(builder.getJson(), MempoolAncestors.ResultArray.class);
+	}
+	public String[] getMempoolDescendants(String txid) {
+		return this.post(new JsonRpc20.Builder().setMethod("getmempooldescendants").appendParams(txid).getJson(), MempoolDescendants.ResultArray.class);
 	}
 
 	/**
@@ -254,6 +276,10 @@ public class BlockChainApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("getmempoolinfo").getJson(), MempoolInfo.Result.class);
 	}
 
+	public String[] getRawMempool() {
+		return this.post(new JsonRpc20.Builder().setMethod("getrawmempool").getJson(), RawMempool.ResultArray.class);
+	}
+
 	/**
 	 * Gets raw mempool.
 	 *
@@ -262,21 +288,26 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the raw mempool
 	 */
 	public Object getRawMempool(boolean verbose, boolean mempool_sequence) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getrawmempool");
-		if (!verbose && !mempool_sequence) {
-			builder.appendParams(verbose).appendParams(mempool_sequence);
-			return this.post(builder.getJson(), RawMempool.ResultArray.class);
-		} else if (verbose && !mempool_sequence) {
-			builder.appendParams(verbose);
-			return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
-		} else if (!verbose && mempool_sequence) {
-			builder.appendParams(mempool_sequence);
-			return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
-		} else if (verbose && mempool_sequence) {
-			builder.appendParams(verbose).appendParams(false);
-			return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
+		if (!verbose && !mempool_sequence)
+			return getRawMempool();
+		else {
+			final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("getrawmempool");
+			if (verbose && !mempool_sequence) {
+				builder.appendParams(verbose);
+				return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
+			} else if (!verbose && mempool_sequence) {
+				builder.appendParams(mempool_sequence);
+				return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
+			} else if (verbose && mempool_sequence) {
+				builder.appendParams(verbose).appendParams(false);
+				return this.post(builder.getJson(), RawMempool.ResultHashMap.class);
+			}
 		}
 		return null;
+	}
+
+	public @Nullable TxOut getTxOut(String txid, long vout) {
+		return this.post(new JsonRpc20.Builder().appendParams(txid).appendParams(vout).getJson(), TxOut.Result.class);
 	}
 
 	/**
@@ -287,12 +318,12 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param include_mempool the include mempool
 	 * @return the tx out
 	 */
-	public TxOut getTxOut(String txid, long vout, boolean include_mempool) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("gettxout").appendParams(txid).appendParams(vout);
-		if (include_mempool) {
-			builder.appendParams(include_mempool);
-		}
-		return this.post(builder.getJson(), TxOut.Result.class);
+	public @Nullable TxOut getTxOut(String txid, long vout, boolean include_mempool) {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxout").appendParams(txid).appendParams(vout).appendParams(include_mempool).getJson(), TxOut.Result.class);
+	}
+
+	public String getTxOutProof(String[] txids) {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutproof").appendParams(txids).getJson(), StringValue.class);
 	}
 
 	/**
@@ -303,11 +334,19 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the tx out proof
 	 */
 	public String getTxOutProof(String[] txids, String blockhash) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("gettxoutproof").appendParams(txids);
-		if (blockhash != null && !blockhash.isEmpty()) {
-			builder.appendParams(blockhash);
-		}
-		return this.post(builder.getJson(), StringValue.class);
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutproof").appendParams(txids).appendParams(blockhash).getJson(), StringValue.class);
+	}
+
+	public TxOutSetInfo getTxOutSetInfo() {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutsetinfo").getJson(), TxOutSetInfo.Result.class);
+	}
+
+	public TxOutSetInfo getTxOutSetInfo(String hash_type) {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutsetinfo").appendParams(hash_type).getJson(), TxOutSetInfo.Result.class);
+	}
+
+	public TxOutSetInfo getTxOutSetInfo(String hash_type, String hash_or_height) {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutsetinfo").appendParams(hash_type).appendParams(hash_or_height).getJson(), TxOutSetInfo.Result.class);
 	}
 
 	/**
@@ -318,12 +357,8 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param use_index      the use index
 	 * @return the tx out set info
 	 */
-	public TxOutSetInfo getTxOutSetInfo(String hash_type, String hash_or_height, boolean use_index) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("gettxoutsetinfo").appendParams(hash_type).appendParams(hash_or_height);
-		if (use_index) {
-			builder.appendParams(use_index);
-		}
-		return this.post(builder.getJson(), TxOutSetInfo.Result.class);
+	public TxOutSetInfo getTxOutSetInfo(String hash_type, String hashOrHeight, boolean use_index) {
+		return this.post(new JsonRpc20.Builder().setMethod("gettxoutsetinfo").appendParams(hash_type).appendParams(hashOrHeight).appendParams(use_index).getJson(), TxOutSetInfo.Result.class);
 	}
 
 	/**
@@ -368,6 +403,9 @@ public class BlockChainApi extends JsonRpcClient {
 		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("savemempool");
 		return this.post(builder.getJson(), SaveMempool.Result.class);
 	}
+	public ScanBlocks scanBlocks(String action) {
+		return this.post(new JsonRpc20.Builder().setMethod("scanblocks").appendParams(action).getJson(), ScanBlocks.Result.class);
+	}
 
 	/**
 	 * Scan blocks scan blocks.
@@ -381,8 +419,11 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the scan blocks
 	 */
 	public ScanBlocks scanBlocks(String action, List<String> scanobjects, long start_height, long stop_height, String filtertype, String options) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("scanblocks").appendParams(action).appendParams(scanobjects).appendParams(start_height).appendParams(stop_height).appendParams(filtertype).appendParams(options);
-		return this.post(builder.getJson(), ScanBlocks.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("scanblocks").appendParams(action).appendParams(scanobjects).appendParams(start_height).appendParams(stop_height).appendParams(filtertype).appendParams(options).getJson(), ScanBlocks.Result.class);
+	}
+
+	public ScanTxOutSet scanTxOutSet(String action) {
+		return this.post(new JsonRpc20.Builder().setMethod("scantxoutset").appendParams(action).getJson(), ScanTxOutSet.Result.class);
 	}
 
 	/**
@@ -393,8 +434,11 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the scan tx out set
 	 */
 	public ScanTxOutSet scanTxOutSet(String action, String scanobjects) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("scantxoutset").appendParams(action).appendParams(scanobjects);
-		return this.post(builder.getJson(), ScanTxOutSet.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("scantxoutset").appendParams(action).appendParams(scanobjects).getJson(), ScanTxOutSet.Result.class);
+	}
+
+	public boolean verifyChain() {
+		return this.post(new JsonRpc20.Builder().setMethod("verifychain").getJson(), BooleanValue.class);
 	}
 
 	/**
@@ -405,8 +449,7 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @return the boolean
 	 */
 	public boolean verifyChain(long checklevel, long nblocks) {
-		final JsonRpc20.Builder builder = new JsonRpc20.Builder().setMethod("verifychain").appendParams(checklevel).appendParams(nblocks);
-		return this.post(builder.getJson(), BooleanValue.class);
+		return this.post(new JsonRpc20.Builder().setMethod("verifychain").appendParams(checklevel).appendParams(nblocks).getJson(), BooleanValue.class);
 	}
 
 	/**
