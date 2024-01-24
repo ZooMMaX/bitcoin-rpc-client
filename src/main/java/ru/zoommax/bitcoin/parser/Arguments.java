@@ -10,7 +10,6 @@ public class Arguments {
 
     public Arguments(String raw) {
         String[] lines = raw.split("\n");
-        System.out.println(Arrays.toString(lines));
         jsonschema = new ArrayList<>();
         description = new ArrayList<>();
 
