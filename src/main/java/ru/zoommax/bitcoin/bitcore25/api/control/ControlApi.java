@@ -22,7 +22,7 @@ public class ControlApi extends JsonRpcClient {
 	}
 
 	public MemoryInfo getRpcInfo() {
-		return null; // TODO
+		return this.post(new JsonRpc20.Builder().setMethod("getrpcinfo").getJson(), MemoryInfo.Result.class);
 	}
 
 	public String help() {
