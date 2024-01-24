@@ -12,7 +12,6 @@ public class Blocks {
 
     public Blocks(String raw) {
         String[] lines = raw.split("\n");
-        System.out.println(Arrays.toString(lines));
         String[] parts = {"","","",""};
         int resultIndex = 0;
         int argumentsIndex = 0;
