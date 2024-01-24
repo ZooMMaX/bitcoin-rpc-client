@@ -10,6 +10,7 @@ import ru.zoommax.bitcoin.bitcore25.model.network.addednode.AddedNodeInfo;
 import ru.zoommax.bitcoin.bitcore25.model.network.nettotals.NetTraffic;
 import ru.zoommax.bitcoin.bitcore25.model.network.networkinfo.NetworkInfo;
 import ru.zoommax.bitcoin.bitcore25.model.useany.LongValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.NullValue;
 
 @ErrorBody
 public class NetworkApi extends JsonRpcClient {
@@ -19,23 +20,23 @@ public class NetworkApi extends JsonRpcClient {
 	}
 
 	public void addNode(String node, String command) {
-		this.post(new JsonRpc20.Builder().setMethod("addnode").appendParams(node).appendParams(command).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("addnode").appendParams(node).appendParams(command).getJson(), NullValue.class);
 	}
 
 	public void clearBanned() {
-		this.post(new JsonRpc20.Builder().setMethod("clearbanned").getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("clearbanned").getJson(), NullValue.class);
 	}
 
 	public void disconnectNode() {
-		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").getJson(), NullValue.class);
 	}
 
 	public void disconnectNode(String address) {
-		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").appendParams(address).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").appendParams(address).getJson(), NullValue.class);
 	}
 
 	public void disconnectNode(String address, long nodeid) {
-		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").appendParams(address).appendParams(nodeid).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("disconnectnode").appendParams(address).appendParams(nodeid).getJson(), NullValue.class);
 	}
 
 	public AddedNodeInfo[] getAddedNodeInfo() {
@@ -79,19 +80,19 @@ public class NetworkApi extends JsonRpcClient {
 	}
 
 	public void ping() {
-		this.post(new JsonRpc20.Builder().setMethod("ping").getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("ping").getJson(), NullValue.class);
 	}
 
 	public void setBan(String subnet, String command) {
-		this.post(new JsonRpc20.Builder().setMethod("setban").appendParams(subnet).appendParams(command).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("setban").appendParams(subnet).appendParams(command).getJson(), NullValue.class);
 	}
 
 	public void setBan(String subnet, String command, long bantime, boolean absolute) {
-		this.post(new JsonRpc20.Builder().setMethod("setban").appendParams(subnet).appendParams(command).appendParams(bantime).appendParams(absolute).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("setban").appendParams(subnet).appendParams(command).appendParams(bantime).appendParams(absolute).getJson(), NullValue.class);
 	}
 
 	public void setNetworkActive(boolean state) {
-		this.post(new JsonRpc20.Builder().setMethod("setnetworkactive").appendParams(state).getJson(), null);
+		this.post(new JsonRpc20.Builder().setMethod("setnetworkactive").appendParams(state).getJson(), NullValue.class);
 	}
 
 
