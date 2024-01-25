@@ -47,7 +47,7 @@ public class NetworkApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("getaddednodeinfo").appendParams(node).getJson(), AddedNodeInfo.Result.class);
 	}
 
-	public Long getConnectionCount() {
+	public long getConnectionCount() {
 		return this.post(new JsonRpc20.Builder().setMethod("getconnectioncount").getJson(), LongValue.class);
 	}
 
