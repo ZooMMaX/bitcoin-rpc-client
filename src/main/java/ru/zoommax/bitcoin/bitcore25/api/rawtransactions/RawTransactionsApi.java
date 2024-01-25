@@ -3,10 +3,13 @@ package ru.zoommax.bitcoin.bitcore25.api.rawtransactions;
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FinalizedPSBT;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FundResult;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.TestMempool;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodepsbt.DecodedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction.DecodedRawTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodescript.DecodedScript;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.psbt.PSBT;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.signrawwithkey.SignRawTransactionWithKey;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
 public class RawTransactionsApi extends JsonRpcClient {
@@ -87,5 +90,53 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("finalizepsbt").appendParams(psbt).appendParams(extract).getJson(), FinalizedPSBT.Result.class);
 	}
 
+	public FundResult fundRawTransaction(String hex) {
+		return this.post(new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hex).getJson(), FundResult.Result.class);
+	}
+
+	public FundResult fundRawTransaction(String hex, Object options, boolean isWitness) { // Complete this (Object options)
+		return this.post(new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hex).appendParams(options).appendParams(isWitness).getJson(), FundResult.Result.class);
+	}
+
+	// make verbosity=1 and verbosity=2
+	public String getRawTransactionV0(String txid) {
+		return this.post(new JsonRpc20.Builder().setMethod("getrawtransaction").appendParams(txid).getJson(), StringValue.class);
+	}
+
+	public String joinPsbts(String[] txs) {
+		return this.post(new JsonRpc20.Builder().setMethod("joinpsbts").appendParams(txs).getJson(), StringValue.class);
+	}
+
+	public String sendRawTransaction(String hex) {
+		return this.post(new JsonRpc20.Builder().setMethod("sendrawtransaction").appendParams(hex).getJson(), StringValue.class);
+	}
+
+	public String sendRawTransaction(String hex, double maxFeeRate, double maxBurnAmount) {
+		return this.post(new JsonRpc20.Builder().setMethod("sendrawtransaction").appendParams(hex).appendParams(maxFeeRate).appendParams(maxBurnAmount).getJson(), StringValue.class);
+	}
+
+	public SignRawTransactionWithKey signRawTransactionWithKey(String hex, String[] privKeys) {
+		return this.post(new JsonRpc20.Builder().setMethod("signrawtransactionwithkey").appendParams(hex).appendParams(privKeys).getJson(), SignRawTransactionWithKey.Result.class);
+	}
+
+	public SignRawTransactionWithKey signRawTransactionWithKey(String hex, String[] privKeys, Object[] prevTxs, String sigHashType) {
+		return this.post(new JsonRpc20.Builder().setMethod("signrawtransactionwithkey").appendParams(hex).appendParams(privKeys).appendParams(prevTxs).appendParams(sigHashType).getJson(), SignRawTransactionWithKey.Result.class);
+	}
+
+	public TestMempool[] testMempoolAccept(String[] rawtxs) {
+		return this.post(new JsonRpc20.Builder().setMethod("testmempoolaccept").appendParams(rawtxs).getJson(), TestMempool.Result.class);
+	}
+
+	public TestMempool[] testMempoolAccept(String[] rawtxs, double maxFeeRate) {
+		return this.post(new JsonRpc20.Builder().setMethod("testmempoolaccept").appendParams(rawtxs).appendParams(maxFeeRate).getJson(), TestMempool.Result.class);
+	}
+
+	public String utxoUpdatePsbt(String psbt) {
+		return this.post(new JsonRpc20.Builder().setMethod("utxoupdatepsbt").appendParams(psbt).getJson(), StringValue.class);
+	}
+
+	public String utxoUpdatePsbt(String psbt, Object[] descriptors) { // Complete this (Object[] descriptors)
+		return this.post(new JsonRpc20.Builder().setMethod("utxoupdatepsbt").appendParams(psbt).appendParams(descriptors).getJson(), StringValue.class);
+	}
 
 }
