@@ -7,53 +7,173 @@ import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 import ru.zoommax.bitcoin.bitcore25.model.useany.ScriptSig;
 
+/**
+ * The type Decoded psbt.
+ */
 @Getter
 @Setter
 public class DecodedPSBT {
 
-	public static class Result extends JsonRpcResult<DecodedPSBT> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<DecodedPSBT> {
 	}
 
-	private Object tx; // TODO Create Tx Object by testing decodepsbt method;
-	private XPub[] global_xpubs;
-	private long psbt_version;
-	private Proprietary[] proprietary;
-	private HashMap<String,String> unknown;
-	private Input[] inputs;
-	private Output[] outputs;
-	private double fee;
+    /**
+     * The Tx.
+     */
+    private Object tx; // TODO Create Tx Object by testing decodepsbt method;
+    /**
+     * The Global xpubs.
+     */
+    private XPub[] global_xpubs;
+    /**
+     * The Psbt version.
+     */
+    private long psbt_version;
+    /**
+     * The Proprietary.
+     */
+    private Proprietary[] proprietary;
+    /**
+     * The Unknown.
+     */
+    private HashMap<String,String> unknown;
+    /**
+     * The Inputs.
+     */
+    private Input[] inputs;
+    /**
+     * The Outputs.
+     */
+    private Output[] outputs;
+    /**
+     * The Fee.
+     */
+    private double fee;
 
-	@Getter @Setter public class Input {
-		private HashMap<String, String> non_witness_utxo;
-		private WitnessUTXO witness_utxo;
-		private HashMap<String,String> partial_signatures;
-		private String sighash;
-		private Script redeem_script;
-		private Script witness_script;
-		private Bip32Deriv[] bip32_derivs;
-		private ScriptSig final_scriptSig;
-		private String[] final_scriptwitness;
-		private HashMap<String,String> ripemd160_preimages;
-		private HashMap<String,String> sha256_preimages;
-		private HashMap<String,String> hash160_preimages;
-		private String taproot_key_path_sig;
-		private TaprootScriptPathSig[] taproot_script_path_sigs;
-		private TaprootScript[] taproot_scripts;
-		private TaprootBip32Deriv[] taproot_bip32_derivs;
-		private String taproot_internal_key;
-		private String taproot_merkle_root;
-		private HashMap<String,String> unknown;
-		private Proprietary[] proprietary;
+    /**
+     * The type Input.
+     */
+    @Getter @Setter public class Input {
+        /**
+         * The Non witness utxo.
+         */
+        private HashMap<String, String> non_witness_utxo;
+        /**
+         * The Witness utxo.
+         */
+        private WitnessUTXO witness_utxo;
+        /**
+         * The Partial signatures.
+         */
+        private HashMap<String,String> partial_signatures;
+        /**
+         * The Sighash.
+         */
+        private String sighash;
+        /**
+         * The Redeem script.
+         */
+        private Script redeem_script;
+        /**
+         * The Witness script.
+         */
+        private Script witness_script;
+        /**
+         * The Bip 32 derivs.
+         */
+        private Bip32Deriv[] bip32_derivs;
+        /**
+         * The Final script sig.
+         */
+        private ScriptSig final_scriptSig;
+        /**
+         * The Final scriptwitness.
+         */
+        private String[] final_scriptwitness;
+        /**
+         * The Ripemd 160 preimages.
+         */
+        private HashMap<String,String> ripemd160_preimages;
+        /**
+         * The Sha 256 preimages.
+         */
+        private HashMap<String,String> sha256_preimages;
+        /**
+         * The Hash 160 preimages.
+         */
+        private HashMap<String,String> hash160_preimages;
+        /**
+         * The Taproot key path sig.
+         */
+        private String taproot_key_path_sig;
+        /**
+         * The Taproot script path sigs.
+         */
+        private TaprootScriptPathSig[] taproot_script_path_sigs;
+        /**
+         * The Taproot scripts.
+         */
+        private TaprootScript[] taproot_scripts;
+        /**
+         * The Taproot bip 32 derivs.
+         */
+        private TaprootBip32Deriv[] taproot_bip32_derivs;
+        /**
+         * The Taproot internal key.
+         */
+        private String taproot_internal_key;
+        /**
+         * The Taproot merkle root.
+         */
+        private String taproot_merkle_root;
+        /**
+         * The Unknown.
+         */
+        private HashMap<String,String> unknown;
+        /**
+         * The Proprietary.
+         */
+        private Proprietary[] proprietary;
 	}
 
-	@Getter @Setter public class Output {
-		private Script redeem_script;
-		private Script witness_script;
-		private Bip32Deriv[] bip32_derivs;
-		private String taproot_internal_key;
-		private Taproot[] taproot_tree;
-		private TaprootBip32Deriv[] taproot_bip32_derivs;
-		private HashMap<String,String> unknown;
-		private Proprietary[] proprietary;
+    /**
+     * The type Output.
+     */
+    @Getter @Setter public class Output {
+        /**
+         * The Redeem script.
+         */
+        private Script redeem_script;
+        /**
+         * The Witness script.
+         */
+        private Script witness_script;
+        /**
+         * The Bip 32 derivs.
+         */
+        private Bip32Deriv[] bip32_derivs;
+        /**
+         * The Taproot internal key.
+         */
+        private String taproot_internal_key;
+        /**
+         * The Taproot tree.
+         */
+        private Taproot[] taproot_tree;
+        /**
+         * The Taproot bip 32 derivs.
+         */
+        private TaprootBip32Deriv[] taproot_bip32_derivs;
+        /**
+         * The Unknown.
+         */
+        private HashMap<String,String> unknown;
+        /**
+         * The Proprietary.
+         */
+        private Proprietary[] proprietary;
 	}
 }

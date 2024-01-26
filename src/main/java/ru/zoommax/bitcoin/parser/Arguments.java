@@ -3,10 +3,24 @@ package ru.zoommax.bitcoin.parser;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Arguments.
+ */
 public class Arguments {
+    /**
+     * The Jsonschema.
+     */
     private List<String> jsonschema;
+    /**
+     * The Description.
+     */
     private List<String> description;
 
+    /**
+     * Instantiates a new Arguments.
+     *
+     * @param raw the raw
+     */
     public Arguments(String raw) {
         String[] lines = raw.split("\n");
         jsonschema = new ArrayList<>();
@@ -25,10 +39,20 @@ public class Arguments {
         }
     }
 
+    /**
+     * Gets jsonschema.
+     *
+     * @return the jsonschema
+     */
     public List<String> getJsonschema() {
         return jsonschema;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public List<String> getDescription() {
         return description;
     }

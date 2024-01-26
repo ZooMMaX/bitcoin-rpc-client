@@ -4,17 +4,38 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Node address.
+ */
 @Getter
 @Setter
 public class NodeAddress {
 
-	public static class Result extends JsonRpcResult<NodeAddress[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<NodeAddress[]> {
 	}
 
-	private long time;
-	private long services;
-	private String address;
-	private int port;
-	private String network;
+    /**
+     * The Time.
+     */
+    private long time;
+    /**
+     * The Services.
+     */
+    private long services;
+    /**
+     * The Address.
+     */
+    private String address;
+    /**
+     * The Port.
+     */
+    private int port;
+    /**
+     * The Network.
+     */
+    private String network;
 
 }

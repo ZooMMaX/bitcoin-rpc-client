@@ -4,15 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Fund result.
+ */
 @Getter
 @Setter
 public class FundResult {
 
-	public static class Result extends JsonRpcResult<FundResult> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<FundResult> {
 	}
 
-	private String hex;
-	private double fee;
-	private long changepos;
+    /**
+     * The Hex.
+     */
+    private String hex;
+    /**
+     * The Fee.
+     */
+    private double fee;
+    /**
+     * The Changepos.
+     */
+    private long changepos;
 
 }

@@ -5,16 +5,28 @@ import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
+/**
+ * The type Memory info.
+ */
 @Getter
 @Setter
 public class MemoryInfo {
 
-	public static class Result extends JsonRpcResult<MemoryInfo> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<MemoryInfo> {
 	}
 
-	public static class ResultMallocInfo extends JsonRpcResult<StringValue> {
+    /**
+     * The type Result malloc info.
+     */
+    public static class ResultMallocInfo extends JsonRpcResult<StringValue> {
 	}
 
-	private Locked locked;
+    /**
+     * The Locked.
+     */
+    private Locked locked;
 
 }

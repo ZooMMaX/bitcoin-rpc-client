@@ -4,19 +4,49 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Mining info.
+ */
 @Getter
 @Setter
 public class MiningInfo {
 
-	public static class Result extends JsonRpcResult<MiningInfo> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<MiningInfo> {
 	}
 
-	private long blocks;
-	private long currentblockweight;
-	private long currentblocktx;
-	private double difficulty;
-	private long networkhashps;
-	private long pooledtx;
-	private String chain;
-	private String warnings;
+    /**
+     * The Blocks.
+     */
+    private long blocks;
+    /**
+     * The Currentblockweight.
+     */
+    private long currentblockweight;
+    /**
+     * The Currentblocktx.
+     */
+    private long currentblocktx;
+    /**
+     * The Difficulty.
+     */
+    private double difficulty;
+    /**
+     * The Networkhashps.
+     */
+    private long networkhashps;
+    /**
+     * The Pooledtx.
+     */
+    private long pooledtx;
+    /**
+     * The Chain.
+     */
+    private String chain;
+    /**
+     * The Warnings.
+     */
+    private String warnings;
 }

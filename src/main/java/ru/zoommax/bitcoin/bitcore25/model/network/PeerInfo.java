@@ -8,55 +8,181 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Peer info.
+ */
 @Getter
 @Setter
 public class PeerInfo {
 
-	public static class Result extends JsonRpcResult<PeerInfo[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<PeerInfo[]> {
 	}
 
-	private long id;
-	private long session_id;
-	private String addr;
-	private String addrbind;
-	private String addrlocal;
-	private String network;
-	private String transport_protocol_type;
-	private long mapped_as;
-	private String services;
-	private String[] servicesnames;
-	private boolean relaytxes;
-	private long lastsend;
-	private long lastrecv;
-	private long last_transaction;
-	private long last_block;
-	@JsonProperty("bytessent")
+    /**
+     * The Id.
+     */
+    private long id;
+    /**
+     * The Session id.
+     */
+    private long session_id;
+    /**
+     * The Addr.
+     */
+    private String addr;
+    /**
+     * The Addrbind.
+     */
+    private String addrbind;
+    /**
+     * The Addrlocal.
+     */
+    private String addrlocal;
+    /**
+     * The Network.
+     */
+    private String network;
+    /**
+     * The Transport protocol type.
+     */
+    private String transport_protocol_type;
+    /**
+     * The Mapped as.
+     */
+    private long mapped_as;
+    /**
+     * The Services.
+     */
+    private String services;
+    /**
+     * The Servicesnames.
+     */
+    private String[] servicesnames;
+    /**
+     * The Relaytxes.
+     */
+    private boolean relaytxes;
+    /**
+     * The Lastsend.
+     */
+    private long lastsend;
+    /**
+     * The Lastrecv.
+     */
+    private long lastrecv;
+    /**
+     * The Last transaction.
+     */
+    private long last_transaction;
+    /**
+     * The Last block.
+     */
+    private long last_block;
+    /**
+     * The Bytes sent.
+     */
+    @JsonProperty("bytessent")
 	private long bytesSent;
-	@JsonProperty("bytesrecv")
+    /**
+     * The Bytes received.
+     */
+    @JsonProperty("bytesrecv")
 	private long bytesReceived;
-	private long conntime;
-	private long timeoffset;
-	private long pingtime;
-	private long minping;
-	private long pingwait;
-	private long version;
-	@JsonProperty("subver")
+    /**
+     * The Conntime.
+     */
+    private long conntime;
+    /**
+     * The Timeoffset.
+     */
+    private long timeoffset;
+    /**
+     * The Pingtime.
+     */
+    private long pingtime;
+    /**
+     * The Minping.
+     */
+    private long minping;
+    /**
+     * The Pingwait.
+     */
+    private long pingwait;
+    /**
+     * The Version.
+     */
+    private long version;
+    /**
+     * The Subversion.
+     */
+    @JsonProperty("subver")
 	private String subversion;
-	private boolean inbound;
-	private boolean bip152_hb_to;
-	private boolean bip152_hb_from;
-	private long startingheight;
-	private long presynced_headers;
-	private long synced_headers;
-	private long synced_blocks;
-	private long[] inflight;
-	private boolean addr_relay_enabled;
-	private long addr_processed;
-	private long addr_rate_limited;
-	private String[] permissions;
-	private double minfeefilter;
-	private HashMap<String,Long> bytessent_per_msg;
-	private HashMap<String,Long> bytesrecv_per_msg;
-	private String connection_type;
+    /**
+     * The Inbound.
+     */
+    private boolean inbound;
+    /**
+     * The Bip 152 hb to.
+     */
+    private boolean bip152_hb_to;
+    /**
+     * The Bip 152 hb from.
+     */
+    private boolean bip152_hb_from;
+    /**
+     * The Startingheight.
+     */
+    private long startingheight;
+    /**
+     * The Presynced headers.
+     */
+    private long presynced_headers;
+    /**
+     * The Synced headers.
+     */
+    private long synced_headers;
+    /**
+     * The Synced blocks.
+     */
+    private long synced_blocks;
+    /**
+     * The Inflight.
+     */
+    private long[] inflight;
+    /**
+     * The Addr relay enabled.
+     */
+    private boolean addr_relay_enabled;
+    /**
+     * The Addr processed.
+     */
+    private long addr_processed;
+    /**
+     * The Addr rate limited.
+     */
+    private long addr_rate_limited;
+    /**
+     * The Permissions.
+     */
+    private String[] permissions;
+    /**
+     * The Minfeefilter.
+     */
+    private double minfeefilter;
+    /**
+     * The Bytessent per msg.
+     */
+    private HashMap<String,Long> bytessent_per_msg;
+    /**
+     * The Bytesrecv per msg.
+     */
+    private HashMap<String,Long> bytesrecv_per_msg;
+    /**
+     * The Connection type.
+     */
+    private String connection_type;
 
 }

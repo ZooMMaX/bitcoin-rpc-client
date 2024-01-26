@@ -5,22 +5,52 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The type Inputs.
+ */
 @Getter
 @Setter
 public class Inputs {
 
-	private boolean has_utxo;
-	private boolean isfinal;
-	private Inputs.Missing missing;
-	private String next;
+    /**
+     * The Has utxo.
+     */
+    private boolean has_utxo;
+    /**
+     * The Isfinal.
+     */
+    private boolean isfinal;
+    /**
+     * The Missing.
+     */
+    private Inputs.Missing missing;
+    /**
+     * The Next.
+     */
+    private String next;
 
-	@Getter @Setter public class Missing {
+    /**
+     * The type Missing.
+     */
+    @Getter @Setter public class Missing {
 
-		private String[] pubkeys;
-		private String[] signatures;
-		@JsonProperty("redeemscript")
+        /**
+         * The Pubkeys.
+         */
+        private String[] pubkeys;
+        /**
+         * The Signatures.
+         */
+        private String[] signatures;
+        /**
+         * The Redeem script.
+         */
+        @JsonProperty("redeemscript")
 		private String redeemScript;
-		@JsonProperty("withnessscript")
+        /**
+         * The Withness script.
+         */
+        @JsonProperty("withnessscript")
 		private String withnessScript;
 
 	}

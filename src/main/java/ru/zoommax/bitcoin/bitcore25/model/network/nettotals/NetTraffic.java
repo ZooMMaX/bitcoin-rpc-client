@@ -6,17 +6,35 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Net traffic.
+ */
 @Getter
 @Setter
 public class NetTraffic {
-	public static class Result extends JsonRpcResult<NetTraffic> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<NetTraffic> {
 	}
 
-	@JsonProperty("totalbytesrecv")
+    /**
+     * The Total bytes received.
+     */
+    @JsonProperty("totalbytesrecv")
 	private long totalBytesReceived;
-	@JsonProperty("totalbytessent")
+    /**
+     * The Total bytes sent.
+     */
+    @JsonProperty("totalbytessent")
 	private long totalBytesSent;
-	private long timemillis;
-	private UploadTarget uploadtarget;
+    /**
+     * The Timemillis.
+     */
+    private long timemillis;
+    /**
+     * The Uploadtarget.
+     */
+    private UploadTarget uploadtarget;
 
 }

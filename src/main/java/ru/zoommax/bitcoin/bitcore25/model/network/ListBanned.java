@@ -4,17 +4,38 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type List banned.
+ */
 @Getter
 @Setter
 public class ListBanned {
 
-	public static class Result extends JsonRpcResult<ListBanned[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<ListBanned[]> {
 	}
 
-	public String address;
-	private long ban_created;
-	private long banned_until;
-	private long ban_duration;
-	private long time_remaining;
+    /**
+     * The Address.
+     */
+    public String address;
+    /**
+     * The Ban created.
+     */
+    private long ban_created;
+    /**
+     * The Banned until.
+     */
+    private long banned_until;
+    /**
+     * The Ban duration.
+     */
+    private long ban_duration;
+    /**
+     * The Time remaining.
+     */
+    private long time_remaining;
 
 }

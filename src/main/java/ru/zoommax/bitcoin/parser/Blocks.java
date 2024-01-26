@@ -4,12 +4,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The type Blocks.
+ */
 public class Blocks {
+    /**
+     * The Description.
+     */
     private String description;
+    /**
+     * The Arguments.
+     */
     private Arguments arguments;
+    /**
+     * The Result.
+     */
     private Result result;
+    /**
+     * The Examples.
+     */
     private List<String> examples;
 
+    /**
+     * Instantiates a new Blocks.
+     *
+     * @param raw the raw
+     */
     public Blocks(String raw) {
         String[] lines = raw.split("\n");
         String[] parts = {"","","",""};
@@ -54,18 +74,38 @@ public class Blocks {
         this.examples.replaceAll(String::trim);
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets arguments.
+     *
+     * @return the arguments
+     */
     public Arguments getArguments() {
         return arguments;
     }
 
+    /**
+     * Gets result.
+     *
+     * @return the result
+     */
     public Result getResult() {
         return result;
     }
 
+    /**
+     * Gets examples.
+     *
+     * @return the examples
+     */
     public List<String> getExamples() {
         return examples;
     }

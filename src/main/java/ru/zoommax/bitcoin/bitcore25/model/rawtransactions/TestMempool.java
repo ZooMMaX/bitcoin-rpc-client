@@ -6,28 +6,67 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Test mempool.
+ */
 @Getter
 @Setter
 public class TestMempool {
 
-	public static class Result extends JsonRpcResult<TestMempool[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<TestMempool[]> {
 	}
 
-	private String txid;
-	private String wtxid;
-	@JsonProperty("package-error")
+    /**
+     * The Txid.
+     */
+    private String txid;
+    /**
+     * The Wtxid.
+     */
+    private String wtxid;
+    /**
+     * The Package error.
+     */
+    @JsonProperty("package-error")
 	private String package_error;
-	private boolean allowed;
-	private long vsize;
-	private Fees fees;
-	@JsonProperty("reject-reason")
+    /**
+     * The Allowed.
+     */
+    private boolean allowed;
+    /**
+     * The Vsize.
+     */
+    private long vsize;
+    /**
+     * The Fees.
+     */
+    private Fees fees;
+    /**
+     * The Reject reason.
+     */
+    @JsonProperty("reject-reason")
 	private String rejectReason;
 
-	@Getter @Setter public class Fees {
-		private double base;
-		@JsonProperty("effective-feerate")
+    /**
+     * The type Fees.
+     */
+    @Getter @Setter public class Fees {
+        /**
+         * The Base.
+         */
+        private double base;
+        /**
+         * The Effective fee rate.
+         */
+        @JsonProperty("effective-feerate")
 		private double effectiveFeeRate;
-		@JsonProperty("effective-includes")
+        /**
+         * The Effective includes.
+         */
+        @JsonProperty("effective-includes")
 		private String[] effectiveIncludes;
 	}
 

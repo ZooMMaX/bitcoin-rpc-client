@@ -4,7 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.bitcore25.model.useany.ScriptPubKey;
 
+/**
+ * The type Witness utxo.
+ */
 @Getter @Setter public class WitnessUTXO {
-	private long amount;
-	private ScriptPubKey scriptPubKey;
+    /**
+     * The Amount.
+     */
+    private long amount;
+    /**
+     * The Script pub key.
+     */
+    private ScriptPubKey scriptPubKey;
 }

@@ -6,8 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * The type Open docs.
+ */
 public class OpenDocs extends Thread{
+    /**
+     * The Docs.
+     */
     private String docs;
+
+    /**
+     * Instantiates a new Open docs.
+     *
+     * @param docs the docs
+     */
     public OpenDocs(String docs) {
         this.docs = docs;
     }

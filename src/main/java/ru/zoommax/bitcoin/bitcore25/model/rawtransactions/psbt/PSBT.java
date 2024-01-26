@@ -4,18 +4,42 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Psbt.
+ */
 @Getter
 @Setter
 public class PSBT {
 
-	public static class Result extends JsonRpcResult<PSBT> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<PSBT> {
 	}
 
-	private Inputs[] inputs;
-	private long estimated_vsize;
-	private double estimated_feerate;
-	private double fee;
-	private String next;
-	private String error;
+    /**
+     * The Inputs.
+     */
+    private Inputs[] inputs;
+    /**
+     * The Estimated vsize.
+     */
+    private long estimated_vsize;
+    /**
+     * The Estimated feerate.
+     */
+    private double estimated_feerate;
+    /**
+     * The Fee.
+     */
+    private double fee;
+    /**
+     * The Next.
+     */
+    private String next;
+    /**
+     * The Error.
+     */
+    private String error;
 
 }

@@ -4,21 +4,54 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Decoded raw transaction.
+ */
 @Getter
 @Setter
 public class DecodedRawTransaction {
 
-	public static class Result extends JsonRpcResult<DecodedRawTransaction> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<DecodedRawTransaction> {
 	}
 
-	private String txid;
-	private String hash;
-	private long size;
-	private long vsize;
-	private long weight;
-	private long version;
-	private long locktime;
-	private VirtualInput[] vin;
-	private VirtualOutput[] vout;
+    /**
+     * The Txid.
+     */
+    private String txid;
+    /**
+     * The Hash.
+     */
+    private String hash;
+    /**
+     * The Size.
+     */
+    private long size;
+    /**
+     * The Vsize.
+     */
+    private long vsize;
+    /**
+     * The Weight.
+     */
+    private long weight;
+    /**
+     * The Version.
+     */
+    private long version;
+    /**
+     * The Locktime.
+     */
+    private long locktime;
+    /**
+     * The Vin.
+     */
+    private VirtualInput[] vin;
+    /**
+     * The Vout.
+     */
+    private VirtualOutput[] vout;
 
 }
