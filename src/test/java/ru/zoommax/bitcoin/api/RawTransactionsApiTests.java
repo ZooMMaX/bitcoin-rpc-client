@@ -23,8 +23,6 @@ public class RawTransactionsApiTests {
 	@Test
 	public void createPsbtRequestArgs(){
 		CreatePsbtRequestArgs args = new CreatePsbtRequestArgs();
-		args.setLocktime(0);
-		args.setReplaceable(false);
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 0);
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 1, 4294967295L);
 		args.addOutput("2N1xZJbW9q2oQZ9P8ZoJn1j1t5t7Z1rjH8p", 0.0001, "6a", "deadbeef");

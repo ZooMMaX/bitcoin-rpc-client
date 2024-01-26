@@ -44,15 +44,15 @@ public class RawTransactionsApi extends JsonRpcClient {
 	}
 
 	public String createPsbt(CreatePsbtRequestArgs args) {
-		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(args.getLocktime()).appendParams(args.isReplaceable()).getJson(), StringValue.class);
+		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(Object[] inputs, Object[] outputs, long lockTime) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(inputs).appendParams(outputs).appendParams(lockTime).getJson(), StringValue.class);
+	public String createPsbt(CreatePsbtRequestArgs args, long lockTime) { // TODO Complete this method
+		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(Object[] inputs, Object[] outputs, long lockTime, boolean replaceable) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(inputs).appendParams(outputs).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
+	public String createPsbt(CreatePsbtRequestArgs args, long lockTime, boolean replaceable) { // TODO Complete this method
+		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
 	}
 
 	public String createRawTransaction(Object[] inputs, Object[] outputs) { // TODO Complete this method

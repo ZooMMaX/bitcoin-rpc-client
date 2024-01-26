@@ -9,8 +9,6 @@ import lombok.Setter;
 public class CreatePsbtRequestArgs {
     private Inputs inputs = new Inputs();
     private Outputs outputs = new Outputs();
-    private long locktime;
-    private boolean replaceable = true;
 
     public void addInput(Input input) {
         this.inputs.setInputs(input);
