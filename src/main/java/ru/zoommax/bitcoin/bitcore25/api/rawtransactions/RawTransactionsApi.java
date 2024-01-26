@@ -47,11 +47,11 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(CreatePsbtRequestArgs args, long lockTime) { // TODO Complete this method
+	public String createPsbt(CreatePsbtRequestArgs args, long lockTime) {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(CreatePsbtRequestArgs args, long lockTime, boolean replaceable) { // TODO Complete this method
+	public String createPsbt(CreatePsbtRequestArgs args, long lockTime, boolean replaceable) {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
 	}
 
