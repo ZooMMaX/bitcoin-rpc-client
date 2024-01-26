@@ -9,11 +9,11 @@ import java.util.List;
 public class Descriptors {
     List<Object> descriptors = new ArrayList<>();
 
-    public void addOutputDescriptor(String descriptor) {
+    public void addDescriptor(String descriptor) {
         this.descriptors.add(descriptor);
     }
 
-    public void addOutputDescriptor(String desc, long[] range) {
+    public void addDescriptor(String desc, long[] range) {
         Descriptor descriptor = new Descriptor();
         descriptor.setDesc(desc);
         descriptor.setRange(range);
