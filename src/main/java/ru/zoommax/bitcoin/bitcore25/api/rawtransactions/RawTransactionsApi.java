@@ -1,5 +1,6 @@
 package ru.zoommax.bitcoin.bitcore25.api.rawtransactions;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.*;
@@ -21,12 +22,16 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("analyzepsbt").appendParams(psbt).getJson(), PSBT.Result.class);
 	}
 
-	public String combinePsbt(String[] txs) { // TODO Maybe this method parameters is JSON array
-		return this.post(new JsonRpc20.Builder().setMethod("combinepsbt").appendParams(txs).getJson(), StringValue.class);
+	public String combinePsbt(String[] txs) {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.valueToTree(txs).toString();
+		return this.post(new JsonRpc20.Builder().setMethod("combinepsbt").appendParams(json).getJson(), StringValue.class);
 	}
 
-	public String combineRawTransaction(String[] txs) { // TODO Maybe this method parameters is JSON array
-		return this.post(new JsonRpc20.Builder().setMethod("combinerawtransaction").appendParams(txs).getJson(), StringValue.class);
+	public String combineRawTransaction(String[] txs) {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.valueToTree(txs).toString();
+		return this.post(new JsonRpc20.Builder().setMethod("combinerawtransaction").appendParams(json).getJson(), StringValue.class);
 	}
 
 	public String convertToPsbt(String hex) {
