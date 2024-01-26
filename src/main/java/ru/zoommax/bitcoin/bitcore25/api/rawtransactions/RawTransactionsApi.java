@@ -2,10 +2,8 @@ package ru.zoommax.bitcoin.bitcore25.api.rawtransactions;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FinalizedPSBT;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FundResult;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.TestMempool;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt.CreatePsbtRequestArgs;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.*;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequestArgsJson;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodepsbt.DecodedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction.DecodedRawTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodescript.DecodedScript;
@@ -43,28 +41,28 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("converttopsbt").appendParams(hex).appendParams(permitSigData).appendParams(isWitness).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(CreatePsbtRequestArgs args) {
+	public String createPsbt(CreatePsbt args) {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(CreatePsbtRequestArgs args, long lockTime) {
+	public String createPsbt(CreatePsbt args, long lockTime) {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(CreatePsbtRequestArgs args, long lockTime, boolean replaceable) {
+	public String createPsbt(CreatePsbt args, long lockTime, boolean replaceable) {
 		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
 	}
 
-	public String createRawTransaction(Object[] inputs, Object[] outputs) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(inputs).appendParams(outputs).getJson(), StringValue.class);
+	public String createRawTransaction(CreateRawTransaction args) {
+		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(args.getInputs()).appendParams(args.getOutputs()).getJson(), StringValue.class);
 	}
 
-	public String createRawTransaction(Object[] inputs, Object[] outputs, long lockTime) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(inputs).appendParams(outputs).appendParams(lockTime).getJson(), StringValue.class);
+	public String createRawTransaction(CreateRawTransaction args, long lockTime) {
+		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).getJson(), StringValue.class);
 	}
 
-	public String createRawTransaction(Object[] inputs, Object[] outputs, long lockTime, boolean replaceable) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(inputs).appendParams(outputs).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
+	public String createRawTransaction(CreateRawTransaction args, long lockTime, boolean replaceable) {
+		return this.post(new JsonRpc20.Builder().setMethod("createrawtransaction").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(lockTime).appendParams(replaceable).getJson(), StringValue.class);
 	}
 
 	public DecodedPSBT decodePsbt(String psbt) {
