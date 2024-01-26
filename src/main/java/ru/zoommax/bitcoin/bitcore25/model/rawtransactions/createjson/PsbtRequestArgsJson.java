@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt;
+package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson;
 
 import lombok.Getter;
 import lombok.NonNull;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreatePsbtRequestArgs {
+public class PsbtRequestArgsJson {
     private Inputs inputs = new Inputs();
     private Outputs outputs = new Outputs();
 

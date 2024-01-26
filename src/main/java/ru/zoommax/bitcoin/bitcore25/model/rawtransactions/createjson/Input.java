@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt;
+package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson;
 
 import lombok.Getter;
 import lombok.Setter;

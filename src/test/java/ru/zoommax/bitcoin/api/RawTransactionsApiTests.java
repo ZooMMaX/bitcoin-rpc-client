@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.zoommax.bitcoin.NodeSettings;
 import ru.zoommax.bitcoin.bitcore25.api.rawtransactions.RawTransactionsApi;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt.CreatePsbtRequestArgs;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequestArgsJson;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class RawTransactionsApiTests {
 
 	@Test
 	public void createPsbtRequestArgs(){
-		CreatePsbtRequestArgs args = new CreatePsbtRequestArgs();
+		PsbtRequestArgsJson args = new PsbtRequestArgsJson();
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 0);
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 1, 4294967295L);
 		args.addOutput("2N1xZJbW9q2oQZ9P8ZoJn1j1t5t7Z1rjH8p", 0.0001, "6a", "deadbeef");

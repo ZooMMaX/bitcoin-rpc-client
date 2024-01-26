@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt;
+package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
