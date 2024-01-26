@@ -8,8 +8,10 @@ import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequest
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodepsbt.DecodedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction.DecodedRawTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodescript.DecodedScript;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Options;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.psbt.PSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.signrawwithkey.SignRawTransactionWithKey;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.utxoupdatepsbt.Descriptors;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 
 public class RawTransactionsApi extends JsonRpcClient {
@@ -98,8 +100,10 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hex).getJson(), FundResult.Result.class);
 	}
 
-	public FundResult fundRawTransaction(String hex, Object options, boolean isWitness) { // Complete this (Object options)
-		return this.post(new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hex).appendParams(options).appendParams(isWitness).getJson(), FundResult.Result.class);
+	public FundResult fundRawTransaction(String hex, Options options, boolean isWitness) {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.valueToTree(options).toString();
+		return this.post(new JsonRpc20.Builder().setMethod("fundrawtransaction").appendParams(hex).appendParams(json).appendParams(isWitness).getJson(), FundResult.Result.class);
 	}
 
 	// make verbosity=1 and verbosity=2
@@ -139,8 +143,10 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("utxoupdatepsbt").appendParams(psbt).getJson(), StringValue.class);
 	}
 
-	public String utxoUpdatePsbt(String psbt, Object[] descriptors) { // Complete this (Object[] descriptors)
-		return this.post(new JsonRpc20.Builder().setMethod("utxoupdatepsbt").appendParams(psbt).appendParams(descriptors).getJson(), StringValue.class);
+	public String utxoUpdatePsbt(String psbt, Descriptors descriptors) {
+		ObjectMapper mapper = new ObjectMapper();
+		String json = mapper.valueToTree(descriptors).toString();
+		return this.post(new JsonRpc20.Builder().setMethod("utxoupdatepsbt").appendParams(psbt).appendParams(json).getJson(), StringValue.class);
 	}
 
 }

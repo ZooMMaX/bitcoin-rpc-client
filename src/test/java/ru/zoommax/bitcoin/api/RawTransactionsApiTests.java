@@ -6,6 +6,9 @@ import org.junit.Test;
 import ru.zoommax.bitcoin.NodeSettings;
 import ru.zoommax.bitcoin.bitcore25.api.rawtransactions.RawTransactionsApi;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequestArgsJson;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.InputWeights;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Options;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.SlovingData;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,5 +33,36 @@ public class RawTransactionsApiTests {
 
 		System.out.println(args.getInputs());
 		System.out.println(args.getOutputs());
+	}
+
+	@Test
+	public void inputWeights(){
+		InputWeights inputWeights = new InputWeights();
+		inputWeights.addInputWeight("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 0, 100);
+		inputWeights.addInputWeight("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9bf", 1, 200);
+		SlovingData slovingData = new SlovingData();
+		slovingData.addAll("6a", "deadbeef", "desc");
+		slovingData.addAll("6b", "deadbeff", "desc");
+
+		Options options = Options.builder()
+				.add_inputs(true)
+				.include_unsafe(true)
+				.minconf(1)
+				.maxconf(9999999)
+				.changeAddress("2N1xZJbW9q2oQZ9P8ZoJn1j1t5t7Z1rjH8p")
+				.changePosition(0)
+				.change_type("legacy")
+				.includeWatching(true)
+				.lockUnspents(true)
+				.fee_rate(0.0001)
+				.feeRate(0.0001)
+				.subtractFeeFromOutputs(new long[]{0})
+				.inputWeights(inputWeights.getInputWeights())
+				.conf_target(6)
+				.estimate_mode("UNSET")
+				.replaceable(true)
+				.solving_data(slovingData)
+				.build();
+		System.out.println(new ObjectMapper().valueToTree(options).toString());
 	}
 }
