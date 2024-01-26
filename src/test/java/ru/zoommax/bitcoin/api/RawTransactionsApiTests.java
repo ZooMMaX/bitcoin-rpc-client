@@ -9,6 +9,7 @@ import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequest
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.InputWeights;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Options;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.SlovingData;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.utxoupdatepsbt.Descriptors;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,5 +65,14 @@ public class RawTransactionsApiTests {
 				.solving_data(slovingData)
 				.build();
 		System.out.println(new ObjectMapper().valueToTree(options).toString());
+	}
+
+	@Test
+	public void descriptors(){
+		Descriptors descriptors = new Descriptors();
+		descriptors.addDescriptor("string");
+		long[] longs = new long[]{1, 2};
+		descriptors.addDescriptor("string", longs);
+		System.out.println(new ObjectMapper().valueToTree(descriptors).toString());
 	}
 }
