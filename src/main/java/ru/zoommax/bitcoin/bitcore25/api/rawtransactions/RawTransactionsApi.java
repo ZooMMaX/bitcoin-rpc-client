@@ -5,6 +5,7 @@ import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FinalizedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FundResult;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.TestMempool;
+import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createpsbt.CreatePsbtRequestArgs;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodepsbt.DecodedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction.DecodedRawTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodescript.DecodedScript;
@@ -22,11 +23,11 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("analyzepsbt").appendParams(psbt).getJson(), PSBT.Result.class);
 	}
 
-	public String combinePsbt(String[] txs) {
+	public String combinePsbt(String[] txs) { // TODO Maybe this method parameters is JSON array
 		return this.post(new JsonRpc20.Builder().setMethod("combinepsbt").appendParams(txs).getJson(), StringValue.class);
 	}
 
-	public String combineRawTransaction(String[] txs) {
+	public String combineRawTransaction(String[] txs) { // TODO Maybe this method parameters is JSON array
 		return this.post(new JsonRpc20.Builder().setMethod("combinerawtransaction").appendParams(txs).getJson(), StringValue.class);
 	}
 
@@ -42,8 +43,8 @@ public class RawTransactionsApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("converttopsbt").appendParams(hex).appendParams(permitSigData).appendParams(isWitness).getJson(), StringValue.class);
 	}
 
-	public String createPsbt(Object[] inputs, Object[] outputs) { // TODO Complete this method
-		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(inputs).appendParams(outputs).getJson(), StringValue.class);
+	public String createPsbt(CreatePsbtRequestArgs args) {
+		return this.post(new JsonRpc20.Builder().setMethod("createpsbt").appendParams(args.getInputs()).appendParams(args.getOutputs()).appendParams(args.getLocktime()).appendParams(args.isReplaceable()).getJson(), StringValue.class);
 	}
 
 	public String createPsbt(Object[] inputs, Object[] outputs, long lockTime) { // TODO Complete this method
