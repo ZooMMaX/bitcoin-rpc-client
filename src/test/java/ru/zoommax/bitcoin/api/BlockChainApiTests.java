@@ -57,8 +57,8 @@ public class BlockChainApiTests {
 
 	@Test
 	public void getBlockHeader() {
-		api.getBlockHeader("000000000000002f08c27c742d5dbfa6db81d3c426ec2487f9d28da201ffded5");
-		api.getBlockHeader("000000000000002f08c27c742d5dbfa6db81d3c426ec2487f9d28da201ffded5", false);
+		api.getBlockHeaderVerboseFalse("000000000000002f08c27c742d5dbfa6db81d3c426ec2487f9d28da201ffded5");
+		api.getBlockHeaderVerboseTrue("000000000000002f08c27c742d5dbfa6db81d3c426ec2487f9d28da201ffded5");
 	}
 
 	@Test

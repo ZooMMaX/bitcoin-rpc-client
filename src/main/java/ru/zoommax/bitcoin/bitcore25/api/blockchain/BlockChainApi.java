@@ -129,13 +129,12 @@ public class BlockChainApi extends JsonRpcClient {
 	 * @param verbose   the verbose
 	 * @return the block header
 	 */
-	public BlockHeader getBlockHeader(String blockHash) {
+	public BlockHeader getBlockHeaderVerboseTrue(String blockHash) {
 		return this.post(new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash).getJson(), BlockHeader.Result.class);
 	}
 
-	public Object getBlockHeader(String blockHash, boolean verbose) { // if verbose true - returns BlockHeader, false - String
-		if (verbose) return getBlockHeader(blockHash);
-		return this.post(new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash).appendParams(verbose).getJson(), StringValue.class);
+	public String getBlockHeaderVerboseFalse(String blockHash) {
+		return this.post(new JsonRpc20.Builder().setMethod("getblockheader").appendParams(blockHash).appendParams(false).getJson(), StringValue.class);
 	}
 
 	private JsonRpc20.Builder blockStats(String hashOrHeight) {
@@ -183,7 +182,11 @@ public class BlockChainApi extends JsonRpcClient {
 	}
 
 	public ChainTxStats getChainTxStats(String blockHash) {
-		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(1 /* HERE NEED TO SET DEFAULT VALUE! */).appendParams(blockHash).getJson(), ChainTxStats.Result.class);
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(blockHash).getJson(), ChainTxStats.Result.class);
+	}
+
+	public ChainTxStats getChainTxStats(String blockHash, long nBlocks) {
+		return this.post(new JsonRpc20.Builder().setMethod("getchaintxstats").appendParams(blockHash).appendParams(nBlocks).getJson(), ChainTxStats.Result.class);
 	}
 
 	/**
