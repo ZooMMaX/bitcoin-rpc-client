@@ -10,13 +10,13 @@ import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FinalizedPSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.FundResult;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.TestMempool;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodepsbt.DecodedPSBT;
-import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction.DecodedRawTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decodescript.DecodedScript;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Options;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.psbt.PSBT;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.signrawwithkey.SignRawTransactionWithKey;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.utxoupdatepsbt.Descriptors;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.decoderawtransaction.DecodedRawTransaction;
 
 /**
  * The type Raw transactions api.

@@ -1,4 +1,4 @@
-package ru.zoommax.bitcoin.bitcore25.model.rawtransactions.decoderawtransaction;
+package ru.zoommax.bitcoin.bitcore25.model.useany.decoderawtransaction;
 
 import lombok.Getter;
 import lombok.Setter;
