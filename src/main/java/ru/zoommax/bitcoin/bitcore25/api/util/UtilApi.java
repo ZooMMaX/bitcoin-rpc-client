@@ -6,11 +6,11 @@ import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
 import ru.zoommax.bitcoin.bitcore25.model.useany.ArrayValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.BooleanValue;
+import ru.zoommax.bitcoin.bitcore25.model.useany.MultiSig;
 import ru.zoommax.bitcoin.bitcore25.model.useany.StringValue;
 import ru.zoommax.bitcoin.bitcore25.model.util.AddressValidation;
 import ru.zoommax.bitcoin.bitcore25.model.util.DescriptorInfo;
 import ru.zoommax.bitcoin.bitcore25.model.util.IndexInfo;
-import ru.zoommax.bitcoin.bitcore25.model.util.MultiSig;
 import ru.zoommax.bitcoin.bitcore25.model.util.SmartFee;
 
 public class UtilApi extends JsonRpcClient {
