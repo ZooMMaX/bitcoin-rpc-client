@@ -1,203 +1,209 @@
 package ru.zoommax.bitcoin;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * The type Json rpc 20.
  */
 public class JsonRpc20 implements Serializable {
-    /**
-     * The constant mapper.
-     */
-    private static final ObjectMapper mapper = new ObjectMapper();
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -1540035671367383733L;
 
-    /**
-     * The Jsonrpc.
-     */
-    private final String jsonrpc = "2.0";
-    /**
-     * The Method.
-     */
-    private String method;
-    /**
-     * The Params.
-     */
-    private Object params;
-    /**
-     * The Id.
-     */
-    private int id;
+	/**
+	 * The constant mapper.
+	 */
+	private static final ObjectMapper mapper = new ObjectMapper();
 
-    /**
-     * The type Builder.
-     */
-    public static class Builder {
-        /**
-         * The Json.
-         */
-        private JsonRpc20 json = new JsonRpc20();
+	/**
+	 * The Jsonrpc.
+	 */
+	private final String jsonrpc = "2.0";
+	/**
+	 * The Method.
+	 */
+	private String method;
+	/**
+	 * The Params.
+	 */
+	private Object params;
+	/**
+	 * The Id.
+	 */
+	private int id;
 
-        /**
-         * Sets method.
-         *
-         * @param method the method
-         * @return the method
-         */
-        public Builder setMethod(String method) {
-            this.json.setMethod(method);
-            return this;
-        }
+	/**
+	 * The type Builder.
+	 */
+	public static class Builder {
+		/**
+		 * The Json.
+		 */
+		private JsonRpc20 json = new JsonRpc20();
 
-        /**
-         * Sets params.
-         *
-         * @param params the params
-         * @return the params
-         */
-        public Builder setParams(Object params) {
-            this.json.setParams(params);
-            return this;
-        }
+		/**
+		 * Sets method.
+		 *
+		 * @param method the method
+		 * @return the method
+		 */
+		public Builder setMethod(String method) {
+			this.json.setMethod(method);
+			return this;
+		}
 
-        /**
-         * Sets id.
-         *
-         * @param id the id
-         * @return the id
-         */
-        public Builder setId(int id) {
-            this.json.setId(id);
-            return this;
-        }
+		/**
+		 * Sets params.
+		 *
+		 * @param params the params
+		 * @return the params
+		 */
+		public Builder setParams(Object params) {
+			this.json.setParams(params);
+			return this;
+		}
 
-        /**
-         * Append params builder.
-         *
-         * @param params the params
-         * @return the builder
-         */
-        public Builder appendParams(Optional<?> params) {
-            appendParams(params.orElse(null));
-            return this;
-        }
+		/**
+		 * Sets id.
+		 *
+		 * @param id the id
+		 * @return the id
+		 */
+		public Builder setId(int id) {
+			this.json.setId(id);
+			return this;
+		}
 
-        /**
-         * Append params builder.
-         *
-         * @param params the params
-         * @return the builder
-         */
-        public Builder appendParams(Object params) {
-            Object pam = this.json.getParams();
-            Collection list;
-            if (pam == null) {
-                list = new ArrayList<>();
-            } else if (pam instanceof Collection) {
-                list = ((Collection) pam);
-            } else if (pam.getClass().isArray()) {
-                list = Arrays.asList(pam);
-            } else {
-                list = new ArrayList<>();
-                list.add(pam);
-            }
-            list.add(params);
-            this.setParams(list);
-            return this;
-        }
+		/**
+		 * Append params builder.
+		 *
+		 * @param params the params
+		 * @return the builder
+		 */
+		public Builder appendParams(Optional<?> params) {
+			appendParams(params.orElse(null));
+			return this;
+		}
 
-        /**
-         * Gets json.
-         *
-         * @return the json
-         */
-        public JsonRpc20 getJson() {
-            return json;
-        }
-    }
+		/**
+		 * Append params builder.
+		 *
+		 * @param params the params
+		 * @return the builder
+		 */
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		public Builder appendParams(Object params) {
+			final Object pam = this.json.getParams();
+			Collection list;
+			if (pam == null) {
+				list = new ArrayList<>();
+			} else if (pam instanceof Collection) {
+				list = ((Collection) pam);
+			} else if (pam.getClass().isArray()) {
+				list = Arrays.asList(pam);
+			} else {
+				list = new ArrayList<>();
+				list.add(pam);
+			}
+			list.add(params);
+			this.setParams(list);
+			return this;
+		}
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
+		/**
+		 * Gets json.
+		 *
+		 * @return the json
+		 */
+		public JsonRpc20 getJson() {
+			return json;
+		}
+	}
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
+	/**
+	 * Gets id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
-    /**
-     * Gets jsonrpc.
-     *
-     * @return the jsonrpc
-     */
-    public String getJsonrpc() {
-        return jsonrpc;
-    }
+	/**
+	 * Sets id.
+	 *
+	 * @param id the id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    /**
-     * Gets method.
-     *
-     * @return the method
-     */
-    public String getMethod() {
-        return method;
-    }
+	/**
+	 * Gets jsonrpc.
+	 *
+	 * @return the jsonrpc
+	 */
+	public String getJsonrpc() {
+		return jsonrpc;
+	}
 
-    /**
-     * Sets method.
-     *
-     * @param method the method
-     */
-    public void setMethod(String method) {
-        this.method = method;
-    }
+	/**
+	 * Gets method.
+	 *
+	 * @return the method
+	 */
+	public String getMethod() {
+		return method;
+	}
 
-    /**
-     * Gets params.
-     *
-     * @return the params
-     */
-    public Object getParams() {
-        return params;
-    }
+	/**
+	 * Sets method.
+	 *
+	 * @param method the method
+	 */
+	public void setMethod(String method) {
+		this.method = method;
+	}
 
-    /**
-     * Sets params.
-     *
-     * @param params the params
-     */
-    public void setParams(Object params) {
-        this.params = params;
-    }
+	/**
+	 * Gets params.
+	 *
+	 * @return the params
+	 */
+	public Object getParams() {
+		return params;
+	}
 
-    /**
-     * To json string.
-     *
-     * @return the string
-     */
-    public String toJson() {
-        try {
-            if (method == null) {
-                throw new RpcException("Method not null !");
-            }
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RpcException(e, "Convert to JSON error !");
-        }
-    }
+	/**
+	 * Sets params.
+	 *
+	 * @param params the params
+	 */
+	public void setParams(Object params) {
+		this.params = params;
+	}
+
+	/**
+	 * To json string.
+	 *
+	 * @return the string
+	 */
+	public String toJson() {
+		try {
+			if (method == null) {
+				throw new RpcException("Method not null !");
+			}
+			return mapper.writeValueAsString(this);
+		} catch (final JsonProcessingException e) {
+			throw new RpcException(e, "Convert to JSON error !");
+		}
+	}
 }

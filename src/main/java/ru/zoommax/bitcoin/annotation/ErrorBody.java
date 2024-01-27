@@ -11,10 +11,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ErrorBody {
-    /**
-     * Body string.
-     *
-     * @return the string
-     */
-    String body() default "";
+	/**
+	 * Body string.
+	 *
+	 * @return the string
+	 */
+	String body() default "";
 }

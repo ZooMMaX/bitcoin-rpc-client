@@ -1,8 +1,13 @@
 package ru.zoommax.bitcoin.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ru.zoommax.bitcoin.NodeSettings;
 import ru.zoommax.bitcoin.bitcore25.api.rawtransactions.RawTransactionsApi;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.createjson.PsbtRequestArgsJson;
@@ -10,9 +15,6 @@ import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Inp
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.Options;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.fundrawtransaction.SlovingData;
 import ru.zoommax.bitcoin.bitcore25.model.rawtransactions.utxoupdatepsbt.Descriptors;
-
-import java.io.File;
-import java.io.IOException;
 
 public class RawTransactionsApiTests {
 	private RawTransactionsApi api;
@@ -25,8 +27,8 @@ public class RawTransactionsApiTests {
 	}
 
 	@Test
-	public void createPsbtRequestArgs(){
-		PsbtRequestArgsJson args = new PsbtRequestArgsJson();
+	public void createPsbtRequestArgs() {
+		final PsbtRequestArgsJson args = new PsbtRequestArgsJson();
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 0);
 		args.addInput("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 1, 4294967295L);
 		args.addOutput("2N1xZJbW9q2oQZ9P8ZoJn1j1t5t7Z1rjH8p", 0.0001, "6a", "deadbeef");
@@ -37,15 +39,15 @@ public class RawTransactionsApiTests {
 	}
 
 	@Test
-	public void inputWeights(){
-		InputWeights inputWeights = new InputWeights();
+	public void inputWeights() {
+		final InputWeights inputWeights = new InputWeights();
 		inputWeights.addInputWeight("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9b9", 0, 100);
 		inputWeights.addInputWeight("f5b72a0c4b1d0b5b4bce3d4d1f7f0f9e5e8c9b9b9b9b9b9b9b9b9b9b9b9b9bf", 1, 200);
-		SlovingData slovingData = new SlovingData();
+		final SlovingData slovingData = new SlovingData();
 		slovingData.addAll("6a", "deadbeef", "desc");
 		slovingData.addAll("6b", "deadbeff", "desc");
 
-		Options options = Options.builder()
+		final Options options = Options.builder()
 				.add_inputs(true)
 				.include_unsafe(true)
 				.minconf(1)
@@ -68,10 +70,10 @@ public class RawTransactionsApiTests {
 	}
 
 	@Test
-	public void descriptors(){
-		Descriptors descriptors = new Descriptors();
+	public void descriptors() {
+		final Descriptors descriptors = new Descriptors();
 		descriptors.addDescriptor("string");
-		long[] longs = new long[]{1, 2};
+		final long[] longs = new long[]{1, 2};
 		descriptors.addDescriptor("string", longs);
 		System.out.println(new ObjectMapper().valueToTree(descriptors).toString());
 	}
