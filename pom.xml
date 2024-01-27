@@ -47,6 +47,14 @@
             <email>zoommax2009@gmail.com</email>
             <url>https://github.com/ZooMMaX</url>
         </developer>
+        <developer>
+			<id>Snoop1CattZ69</id>
+			<name>Bliznichenko Viktor</name>
+			<email>agronaut8323@gmail.com</email>
+			<organization>As Second Life Studio</organization>
+			<organizationUrl>https://aslstd.org/</organizationUrl>
+			<url>https://github.com/Snoop1CattZ69</url>
+		</developer>
     </developers>
 
     <properties>
