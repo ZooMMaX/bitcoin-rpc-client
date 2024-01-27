@@ -24,7 +24,7 @@ public class ControlApiTests {
 	@Test
 	public void getMemoryInfo() {
 		api.getMemoryInfo();
-		api.getMemoryInfo("mallocinfo");
+		api.getMemoryInfoMI();
 	}
 
 	@Test
