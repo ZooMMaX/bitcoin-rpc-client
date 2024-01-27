@@ -4,6 +4,7 @@ import java.util.Map;
 
 import ru.zoommax.bitcoin.JsonRpc20;
 import ru.zoommax.bitcoin.JsonRpcClient;
+import ru.zoommax.bitcoin.bitcore25.model.useany.ArrayValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.BooleanValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.DoubleValue;
 import ru.zoommax.bitcoin.bitcore25.model.useany.MultiSig;
@@ -13,8 +14,13 @@ import ru.zoommax.bitcoin.bitcore25.model.wallet.AddressInfo;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.AddressPurpose;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.BumpFee;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.ImportFeedback;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.ListTransactions;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.LockUnspentOut;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.ReceivedTransaction;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.UnspentTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.WalletCreate;
-import ru.zoommax.bitcoin.bitcore25.model.wallet.WalletDumpFileInfo;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.WalletDestination;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.descriptors.ListDescriptors;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.getbalances.Balances;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.getbalances.Mine;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.gettransaction.WTransaction;
@@ -84,8 +90,8 @@ public class WalletApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("dumpprivkey").appendParams(address).getJson(), StringValue.class);
 	}
 
-	public WalletDumpFileInfo dumpWallet(String filename) {
-		return this.post(new JsonRpc20.Builder().setMethod("dumpwallet").appendParams(filename).getJson(), WalletDumpFileInfo.Result.class);
+	public WalletDestination dumpWallet(String filename) {
+		return this.post(new JsonRpc20.Builder().setMethod("dumpwallet").appendParams(filename).getJson(), WalletDestination.Result.class);
 	}
 
 	public String encryptWallet(String passphrase) {
@@ -219,6 +225,94 @@ public class WalletApi extends JsonRpcClient {
 
 	public void importWallet(String fileName) {
 		this.post(new JsonRpc20.Builder().setMethod("importWallet").appendParams(fileName).getJson(), NullValue.class);
+	}
+
+	public void keyPoolRefill() {
+		this.post(new JsonRpc20.Builder().setMethod("keypoolrefill").getJson(), NullValue.class);
+	}
+
+	public void keyPoolRefill(long newSize) {
+		this.post(new JsonRpc20.Builder().setMethod("keypoolrefill").appendParams(newSize).getJson(), NullValue.class);
+	}
+
+	public Object[][][] listAddressGroupings() {
+		return this.post(new JsonRpc20.Builder().setMethod("listaddressgroupings").getJson(), ArrayValue.ThreeArray.class);
+	}
+
+	public ListDescriptors listDescriptors() {
+		return this.post(new JsonRpc20.Builder().setMethod("listdescriptors").getJson(), ListDescriptors.Result.class);
+	}
+
+	public ListDescriptors listDescriptors(boolean showPrivate) {
+		return this.post(new JsonRpc20.Builder().setMethod("listdescriptors").appendParams(showPrivate).getJson(), ListDescriptors.Result.class);
+	}
+
+	public String[] listLabels() {
+		return this.post(new JsonRpc20.Builder().setMethod("listlabels").getJson(), ArrayValue.StringArray.class);
+	}
+
+	public String[] listLabels(String purpose) {
+		return this.post(new JsonRpc20.Builder().setMethod("listlabels").appendParams(purpose).getJson(), ArrayValue.StringArray.class);
+	}
+
+	public LockUnspentOut[] listLockUnspent() {
+		return this.post(new JsonRpc20.Builder().setMethod("listlockunspent").getJson(), LockUnspentOut.Result.class);
+	}
+
+	public ReceivedTransaction[] listReceivedByAddress() {
+		return this.post(new JsonRpc20.Builder().setMethod("listreceivedbyaddress").getJson(), ReceivedTransaction.Result.class);
+	}
+
+	public ReceivedTransaction[] listReceivedByAddress(long minConfirm, boolean includeEmpty, boolean includeWatchOnly, String addressFilter, boolean includeImmatureCoinbase) {
+		return this.post(new JsonRpc20.Builder().setMethod("listreceivedbyaddress").appendParams(minConfirm).appendParams(includeEmpty).appendParams(includeWatchOnly).appendParams(addressFilter).appendParams(includeImmatureCoinbase).getJson(), ReceivedTransaction.Result.class);
+	}
+
+	public ReceivedTransaction[] listReceivedByLabel() {
+		return this.post(new JsonRpc20.Builder().setMethod("listreceivedbylabel").getJson(), ReceivedTransaction.Result.class);
+	}
+
+	public ReceivedTransaction[] listReceivedByLabel(long minConfirm, boolean includeEmpty, boolean includeWatchOnly, String addressFilter, boolean includeImmatureCoinbase) {
+		return this.post(new JsonRpc20.Builder().setMethod("listreceivedbylabel").appendParams(minConfirm).appendParams(includeEmpty).appendParams(includeWatchOnly).appendParams(addressFilter).appendParams(includeImmatureCoinbase).getJson(), ReceivedTransaction.Result.class);
+	}
+
+	public ListTransactions listSinceBlock() {
+		return this.post(new JsonRpc20.Builder().setMethod("listsinceblock").getJson(), ListTransactions.Result.class);
+	}
+
+	public ListTransactions listSinceBlock(String blockHash, long targetConfirm) {
+		return this.post(new JsonRpc20.Builder().setMethod("listsinceblock").appendParams(blockHash).appendParams(targetConfirm).getJson(), ListTransactions.Result.class);
+	}
+
+	public ListTransactions listSinceBlock(String blockHash, long targetConfirm, boolean includeWatchOnly, boolean includeRemoved, boolean includeChange, String label) {
+		return this.post(new JsonRpc20.Builder().setMethod("listsinceblock").appendParams(blockHash).appendParams(targetConfirm).appendParams(includeWatchOnly).appendParams(includeRemoved).appendParams(includeChange).appendParams(label).getJson(), ListTransactions.Result.class);
+	}
+
+	public WTransaction[] listTransactions() {
+		return this.post(new JsonRpc20.Builder().setMethod("listtransactions").getJson(), WTransaction.ResultArray.class);
+	}
+
+	public WTransaction[] listTransactions(String label, long count, long skip, boolean includeWatchOnly) {
+		return this.post(new JsonRpc20.Builder().setMethod("listtransactions").appendParams(label).appendParams(count).appendParams(skip).appendParams(includeWatchOnly).getJson(), WTransaction.ResultArray.class);
+	}
+
+	public UnspentTransaction[] listUnspent() {
+		return this.post(new JsonRpc20.Builder().setMethod("listunspent").getJson(), UnspentTransaction.ResultArray.class);
+	}
+
+	public UnspentTransaction[] listUnspent(long minConfirm, long maxConfirm) {
+		return this.post(new JsonRpc20.Builder().setMethod("listunspent").appendParams(minConfirm).appendParams(maxConfirm).getJson(), UnspentTransaction.ResultArray.class);
+	}
+
+	public UnspentTransaction[] listUnspent(long minConfirm, long maxConfirm, String[] addresses) {
+		return this.post(new JsonRpc20.Builder().setMethod("listunspent").appendParams(minConfirm).appendParams(maxConfirm).appendParams(addresses).getJson(), UnspentTransaction.ResultArray.class);
+	}
+
+	public UnspentTransaction[] listUnspent(long minConfirm, long maxConfirm, String[] addresses, boolean includeUnsafe) {
+		return this.post(new JsonRpc20.Builder().setMethod("listunspent").appendParams(minConfirm).appendParams(maxConfirm).appendParams(addresses).appendParams(includeUnsafe).getJson(), UnspentTransaction.ResultArray.class);
+	}
+
+	public UnspentTransaction[] listUnspent(long minConfirm, long maxConfirm, String[] addresses, boolean includeUnsafe, Object queryOptions) { // TODO Create QueryOptions argument object
+		return this.post(new JsonRpc20.Builder().setMethod("listunspent").appendParams(minConfirm).appendParams(maxConfirm).appendParams(addresses).appendParams(includeUnsafe).appendParams(queryOptions).getJson(), UnspentTransaction.ResultArray.class);
 	}
 
 }

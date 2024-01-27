@@ -6,11 +6,12 @@ import ru.zoommax.bitcoin.JsonRpcResult;
 
 @Getter
 @Setter
-public class WalletDumpFileInfo {
+public class LockUnspentOut {
 
-	public static class Result extends JsonRpcResult<WalletDumpFileInfo> {
+	public static class Result extends JsonRpcResult<LockUnspentOut[]> {
 	}
 
-	private String filename;
+	private String txid;
+	private long vout;
 
 }

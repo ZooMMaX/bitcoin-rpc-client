@@ -12,6 +12,9 @@ public class WTransaction {
 	public static class Result extends JsonRpcResult<WTransaction> {
 	}
 
+	public static class ResultArray extends JsonRpcResult<WTransaction[]> {
+	}
+
 	private double amount;
 	private double fee;
 	private long confirmations;
