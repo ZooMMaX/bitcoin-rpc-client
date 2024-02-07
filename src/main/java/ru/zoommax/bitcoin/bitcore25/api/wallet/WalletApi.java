@@ -15,7 +15,9 @@ import ru.zoommax.bitcoin.bitcore25.model.wallet.AddressPurpose;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.BumpFee;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.ImportFeedback;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.ListTransactions;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.LoadWallet;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.LockUnspentOut;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.MigrateWallet;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.ReceivedTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.UnspentTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.WalletCreate;
@@ -25,6 +27,7 @@ import ru.zoommax.bitcoin.bitcore25.model.wallet.getbalances.Balances;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.getbalances.Mine;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.gettransaction.WTransaction;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.getwalletinfo.WalletInfo;
+import ru.zoommax.bitcoin.bitcore25.model.wallet.listwalletsdir.ListWalletsDir;
 
 public class WalletApi extends JsonRpcClient {
 
@@ -313,6 +316,46 @@ public class WalletApi extends JsonRpcClient {
 
 	public UnspentTransaction[] listUnspent(long minConfirm, long maxConfirm, String[] addresses, boolean includeUnsafe, Object queryOptions) { // TODO Create QueryOptions argument object
 		return this.post(new JsonRpc20.Builder().setMethod("listunspent").appendParams(minConfirm).appendParams(maxConfirm).appendParams(addresses).appendParams(includeUnsafe).appendParams(queryOptions).getJson(), UnspentTransaction.ResultArray.class);
+	}
+
+	public ListWalletsDir listWalletsDir() {
+		return this.post(new JsonRpc20.Builder().setMethod("listwalletdir").getJson(), ListWalletsDir.Result.class);
+	}
+
+	public String[] listWallets() {
+		return this.post(new JsonRpc20.Builder().setMethod("listwallets").getJson(), ArrayValue.StringArray.class);
+	}
+
+	public LoadWallet loadWallet(String fileName) {
+		return this.post(new JsonRpc20.Builder().setMethod("loadwallet").appendParams(fileName).getJson(), LoadWallet.Result.class);
+	}
+
+	public LoadWallet loadWallet(String fileName, boolean loadOnStartup) {
+		return this.post(new JsonRpc20.Builder().setMethod("loadwallet").appendParams(fileName).appendParams(loadOnStartup).getJson(), LoadWallet.Result.class);
+	}
+
+	public boolean lockUnspent(boolean unlock) {
+		return this.post(new JsonRpc20.Builder().setMethod("lockunspent").appendParams(unlock).getJson(), BooleanValue.class);
+	}
+
+	public boolean lockUnspent(boolean unlock, Object[] transactions) { // TODO Complete Argument object 'transactions'
+		return this.post(new JsonRpc20.Builder().setMethod("lockunspent").appendParams(unlock).appendParams(transactions).getJson(), BooleanValue.class);
+	}
+
+	public boolean lockUnspent(boolean unlock, Object[] transactions, boolean persistent) {
+		return this.post(new JsonRpc20.Builder().setMethod("lockunspent").appendParams(unlock).appendParams(transactions).appendParams(persistent).getJson(), BooleanValue.class);
+	}
+
+	public MigrateWallet migrateWallet() {
+		return this.post(new JsonRpc20.Builder().setMethod("migratewallet").getJson(), MigrateWallet.Result.class);
+	}
+
+	public MigrateWallet migrateWallet(String walletName, String passPhrase) {
+		return this.post(new JsonRpc20.Builder().setMethod("migratewallet").appendParams(walletName).appendParams(passPhrase).getJson(), MigrateWallet.Result.class);
+	}
+
+	public void newKeypool() {
+		this.post(new JsonRpc20.Builder().setMethod("newkeypool").getJson(), NullValue.class);
 	}
 
 }
