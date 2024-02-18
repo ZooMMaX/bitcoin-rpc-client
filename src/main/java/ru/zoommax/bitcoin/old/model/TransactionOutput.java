@@ -54,6 +54,11 @@ public interface TransactionOutput {
             this.amount = amount;
         }
 
+        /**
+         * To single map map.
+         *
+         * @return the map
+         */
         @Override
         public Map<String, ?> toSingleMap() {
             return Collections.singletonMap(address, amount);
@@ -78,6 +83,11 @@ public interface TransactionOutput {
             this.data = data;
         }
 
+        /**
+         * To single map map.
+         *
+         * @return the map
+         */
         @Override
         public Map<String, ?> toSingleMap() {
             return Collections.singletonMap("data", new BigInteger(data).toString(16));

@@ -4,21 +4,54 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Address validation.
+ */
 @Getter
 @Setter
 public class AddressValidation {
 
-	public static class Result extends JsonRpcResult<AddressValidation> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<AddressValidation> {
 	}
 
-	private boolean isvalid;
-	private String address;
-	private String scriptPubKey;
-	private boolean isscript;
-	private boolean iswitness;
-	private long witness_version;
-	private String witness_program;
-	private String error;
-	private long[] error_locations;
+    /**
+     * The Isvalid.
+     */
+    private boolean isvalid;
+    /**
+     * The Address.
+     */
+    private String address;
+    /**
+     * The Script pub key.
+     */
+    private String scriptPubKey;
+    /**
+     * The Isscript.
+     */
+    private boolean isscript;
+    /**
+     * The Iswitness.
+     */
+    private boolean iswitness;
+    /**
+     * The Witness version.
+     */
+    private long witness_version;
+    /**
+     * The Witness program.
+     */
+    private String witness_program;
+    /**
+     * The Error.
+     */
+    private String error;
+    /**
+     * The Error locations.
+     */
+    private long[] error_locations;
 
 }

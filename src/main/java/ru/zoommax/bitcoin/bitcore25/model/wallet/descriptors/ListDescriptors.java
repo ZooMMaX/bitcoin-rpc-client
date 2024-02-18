@@ -4,14 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type List descriptors.
+ */
 @Getter
 @Setter
 public class ListDescriptors {
 
-	public static class Result extends JsonRpcResult<ListDescriptors> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<ListDescriptors> {
 	}
 
-	private String wallet_name;
-	private Descriptor[] descriptors;
+    /**
+     * The Wallet name.
+     */
+    private String wallet_name;
+    /**
+     * The Descriptors.
+     */
+    private Descriptor[] descriptors;
 
 }

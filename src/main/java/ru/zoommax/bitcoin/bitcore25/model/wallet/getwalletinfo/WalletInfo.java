@@ -7,16 +7,31 @@ import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 import ru.zoommax.bitcoin.bitcore25.model.wallet.getbalances.Mine;
 
+/**
+ * The type Wallet info.
+ */
 @Getter
 @Setter
 public class WalletInfo {
 
-	public static class Result extends JsonRpcResult<WalletInfo> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<WalletInfo> {
 	}
 
-	private String walletname;
-	private long walletversion;
-	private String format;
+    /**
+     * The Walletname.
+     */
+    private String walletname;
+    /**
+     * The Walletversion.
+     */
+    private long walletversion;
+    /**
+     * The Format.
+     */
+    private String format;
 	/**
 	 * @deprecated see {@link #getBalances()} {@link Mine#getTrusted()}
 	 */
@@ -32,20 +47,56 @@ public class WalletInfo {
 	 */
 	@Deprecated
 	private double immature_balance;
-	private long txcount;
-	@JsonProperty("keypoololdest")
+    /**
+     * The Txcount.
+     */
+    private long txcount;
+    /**
+     * The Key pool oldest.
+     */
+    @JsonProperty("keypoololdest")
 	private long keyPoolOldest;
-	@JsonProperty("keypoolsize")
+    /**
+     * The Key pool size.
+     */
+    @JsonProperty("keypoolsize")
 	private long keyPoolSize;
-	@JsonProperty("keypoolsize_hd_internal")
+    /**
+     * The Key pool size hd internal.
+     */
+    @JsonProperty("keypoolsize_hd_internal")
 	private long keyPoolSizeHDInternal;
-	private long unlocked_until;
-	private double paytxfee;
-	private String hdseedid;
-	private boolean private_keys_enabled;
-	private boolean avoid_reuse;
-	private Scanning scanning;
-	private boolean descriptors;
-	private boolean external_signer;
+    /**
+     * The Unlocked until.
+     */
+    private long unlocked_until;
+    /**
+     * The Paytxfee.
+     */
+    private double paytxfee;
+    /**
+     * The Hdseedid.
+     */
+    private String hdseedid;
+    /**
+     * The Private keys enabled.
+     */
+    private boolean private_keys_enabled;
+    /**
+     * The Avoid reuse.
+     */
+    private boolean avoid_reuse;
+    /**
+     * The Scanning.
+     */
+    private Scanning scanning;
+    /**
+     * The Descriptors.
+     */
+    private boolean descriptors;
+    /**
+     * The External signer.
+     */
+    private boolean external_signer;
 
 }

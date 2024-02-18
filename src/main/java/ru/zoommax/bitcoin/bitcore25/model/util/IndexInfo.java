@@ -6,14 +6,26 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Index info.
+ */
 @Getter
 @Setter
 public class IndexInfo {
 
-	public static class ResultMap extends JsonRpcResult<Map<String,IndexInfo>> {
+    /**
+     * The type Result map.
+     */
+    public static class ResultMap extends JsonRpcResult<Map<String,IndexInfo>> {
 	}
 
-	private boolean synced;
-	private long best_block_height;
+    /**
+     * The Synced.
+     */
+    private boolean synced;
+    /**
+     * The Best block height.
+     */
+    private long best_block_height;
 
 }

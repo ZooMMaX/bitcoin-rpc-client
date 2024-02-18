@@ -6,18 +6,39 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Descriptor info.
+ */
 @Getter
 @Setter
 public class DescriptorInfo {
 
-	public static class Result extends JsonRpcResult<DescriptorInfo> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<DescriptorInfo> {
 	}
 
-	private String descriptor;
-	private String checksum;
-	private boolean isrange;
-	private boolean issolvable;
-	@JsonProperty("hasprivatekeys")
+    /**
+     * The Descriptor.
+     */
+    private String descriptor;
+    /**
+     * The Checksum.
+     */
+    private String checksum;
+    /**
+     * The Isrange.
+     */
+    private boolean isrange;
+    /**
+     * The Issolvable.
+     */
+    private boolean issolvable;
+    /**
+     * The Has private keys.
+     */
+    @JsonProperty("hasprivatekeys")
 	private boolean hasPrivateKeys;
 
 }

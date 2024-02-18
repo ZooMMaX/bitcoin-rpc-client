@@ -4,14 +4,29 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Import feedback.
+ */
 @Getter
 @Setter
 public class ImportFeedback {
 
-	public static class Result extends JsonRpcResult<ImportFeedback[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<ImportFeedback[]> {
 	}
 
-	public boolean success;
-	private String warnings;
-	private Object[] error; // TODO JSONRPC error
+    /**
+     * The Success.
+     */
+    public boolean success;
+    /**
+     * The Warnings.
+     */
+    private String warnings;
+    /**
+     * The Error.
+     */
+    private Object[] error; // TODO JSONRPC error
 }

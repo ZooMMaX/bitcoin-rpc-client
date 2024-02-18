@@ -33,7 +33,10 @@ public class OpenDocs extends Thread{
 		this.docs = docs;
 	}
 
-	@Override
+    /**
+     * Run.
+     */
+    @Override
 	public void run() {
 		final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		final JFrame frame = new JFrame("Bitcoin RPC API");

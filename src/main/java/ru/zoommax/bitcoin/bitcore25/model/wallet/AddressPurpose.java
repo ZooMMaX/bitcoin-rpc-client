@@ -6,13 +6,22 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Address purpose.
+ */
 @Getter
 @Setter
 public class AddressPurpose {
 
-	public static class ResultMap extends JsonRpcResult<Map<String,AddressPurpose>> {
+    /**
+     * The type Result map.
+     */
+    public static class ResultMap extends JsonRpcResult<Map<String,AddressPurpose>> {
 	}
 
-	private String purpose;
+    /**
+     * The Purpose.
+     */
+    private String purpose;
 
 }

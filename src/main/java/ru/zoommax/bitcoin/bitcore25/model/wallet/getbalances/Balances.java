@@ -4,14 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Balances.
+ */
 @Getter
 @Setter
 public class Balances {
 
-	public static class Result extends JsonRpcResult<Balances> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<Balances> {
 	}
 
-	private Mine mine;
-	private WatchOnly watchonly;
+    /**
+     * The Mine.
+     */
+    private Mine mine;
+    /**
+     * The Watchonly.
+     */
+    private WatchOnly watchonly;
 
 }

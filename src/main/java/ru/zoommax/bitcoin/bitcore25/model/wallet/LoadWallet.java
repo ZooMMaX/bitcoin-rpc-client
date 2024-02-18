@@ -4,15 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Load wallet.
+ */
 @Getter
 @Setter
 public class LoadWallet {
 
-	public static class Result extends JsonRpcResult<LoadWallet> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<LoadWallet> {
 	}
 
-	private String name;
-	private String warning;
-	private String[] warnings;
+    /**
+     * The Name.
+     */
+    private String name;
+    /**
+     * The Warning.
+     */
+    private String warning;
+    /**
+     * The Warnings.
+     */
+    private String[] warnings;
 
 }

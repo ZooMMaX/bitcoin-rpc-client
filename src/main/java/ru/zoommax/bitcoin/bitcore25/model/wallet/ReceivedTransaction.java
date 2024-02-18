@@ -4,18 +4,42 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Received transaction.
+ */
 @Getter
 @Setter
 public class ReceivedTransaction {
 
-	public static class Result extends JsonRpcResult<ReceivedTransaction[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<ReceivedTransaction[]> {
 	}
 
-	private boolean involvesWatchonly;
-	private String address;
-	private double amount;
-	private long confirmations;
-	private String label;
-	private String[] txids;
+    /**
+     * The Involves watchonly.
+     */
+    private boolean involvesWatchonly;
+    /**
+     * The Address.
+     */
+    private String address;
+    /**
+     * The Amount.
+     */
+    private double amount;
+    /**
+     * The Confirmations.
+     */
+    private long confirmations;
+    /**
+     * The Label.
+     */
+    private String label;
+    /**
+     * The Txids.
+     */
+    private String[] txids;
 
 }

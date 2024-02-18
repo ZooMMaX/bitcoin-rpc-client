@@ -4,14 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Lock unspent out.
+ */
 @Getter
 @Setter
 public class LockUnspentOut {
 
-	public static class Result extends JsonRpcResult<LockUnspentOut[]> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<LockUnspentOut[]> {
 	}
 
-	private String txid;
-	private long vout;
+    /**
+     * The Txid.
+     */
+    private String txid;
+    /**
+     * The Vout.
+     */
+    private long vout;
 
 }

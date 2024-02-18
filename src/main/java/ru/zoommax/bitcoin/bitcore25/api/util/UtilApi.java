@@ -13,57 +13,147 @@ import ru.zoommax.bitcoin.bitcore25.model.util.DescriptorInfo;
 import ru.zoommax.bitcoin.bitcore25.model.util.IndexInfo;
 import ru.zoommax.bitcoin.bitcore25.model.util.SmartFee;
 
+/**
+ * The type Util api.
+ */
 public class UtilApi extends JsonRpcClient {
 
-	public UtilApi(String username, String password, String url){
+    /**
+     * Instantiates a new Util api.
+     *
+     * @param username the username
+     * @param password the password
+     * @param url      the url
+     */
+    public UtilApi(String username, String password, String url){
 		super(username, password, url);
 	}
 
-	public MultiSig createMultiSig(long nRequired, String[] keys) {
+    /**
+     * Create multi sig multi sig.
+     *
+     * @param nRequired the n required
+     * @param keys      the keys
+     * @return the multi sig
+     */
+    public MultiSig createMultiSig(long nRequired, String[] keys) {
 		return this.post(new JsonRpc20.Builder().setMethod("createmultisig").appendParams(nRequired).appendParams(keys).getJson(), MultiSig.Result.class);
 	}
 
-	public MultiSig createMultiSig(long nRequred, String[] keys, String addressType) {
+    /**
+     * Create multi sig multi sig.
+     *
+     * @param nRequred    the n requred
+     * @param keys        the keys
+     * @param addressType the address type
+     * @return the multi sig
+     */
+    public MultiSig createMultiSig(long nRequred, String[] keys, String addressType) {
 		return this.post(new JsonRpc20.Builder().setMethod("createmultisig").appendParams(nRequred).appendParams(keys).appendParams(addressType).getJson(), MultiSig.Result.class);
 	}
 
-	public String[] deriveAddresses(String descriptor) {
+    /**
+     * Derive addresses string [ ].
+     *
+     * @param descriptor the descriptor
+     * @return the string [ ]
+     */
+    public String[] deriveAddresses(String descriptor) {
 		return this.post(new JsonRpc20.Builder().setMethod("deriveaddresses").appendParams(descriptor).getJson(), ArrayValue.StringArray.class);
 	}
 
-	public String[] deriveAddresses(String descriptor, long begin, long end) {
+    /**
+     * Derive addresses string [ ].
+     *
+     * @param descriptor the descriptor
+     * @param begin      the begin
+     * @param end        the end
+     * @return the string [ ]
+     */
+    public String[] deriveAddresses(String descriptor, long begin, long end) {
 		return this.post(new JsonRpc20.Builder().setMethod("deriveaddresses").appendParams(descriptor).appendParams(new long[] { begin, end }).getJson(), ArrayValue.StringArray.class);
 	}
 
-	public SmartFee estimateSmartFee(long confTarget) {
+    /**
+     * Estimate smart fee smart fee.
+     *
+     * @param confTarget the conf target
+     * @return the smart fee
+     */
+    public SmartFee estimateSmartFee(long confTarget) {
 		return this.post(new JsonRpc20.Builder().setMethod("estimatesmartfee").appendParams(confTarget).getJson(), SmartFee.Result.class);
 	}
 
-	public SmartFee estimateSmartFee(long confTarget, String estimateMode) {
+    /**
+     * Estimate smart fee smart fee.
+     *
+     * @param confTarget   the conf target
+     * @param estimateMode the estimate mode
+     * @return the smart fee
+     */
+    public SmartFee estimateSmartFee(long confTarget, String estimateMode) {
 		return this.post(new JsonRpc20.Builder().setMethod("estimatesmartfee").appendParams(confTarget).appendParams(estimateMode).getJson(), SmartFee.Result.class);
 	}
 
-	public DescriptorInfo getDescriptorInfo(String descriptor) {
+    /**
+     * Gets descriptor info.
+     *
+     * @param descriptor the descriptor
+     * @return the descriptor info
+     */
+    public DescriptorInfo getDescriptorInfo(String descriptor) {
 		return this.post(new JsonRpc20.Builder().setMethod("getdescriptorinfo").appendParams(descriptor).getJson(), DescriptorInfo.Result.class);
 	}
 
-	public Map<String,IndexInfo> getIndexInfo() {
+    /**
+     * Gets index info.
+     *
+     * @return the index info
+     */
+    public Map<String,IndexInfo> getIndexInfo() {
 		return this.post(new JsonRpc20.Builder().setMethod("getindexinfo").getJson(), IndexInfo.ResultMap.class);
 	}
 
-	public Map<String,IndexInfo> getIndexInfo(String indexName) {
+    /**
+     * Gets index info.
+     *
+     * @param indexName the index name
+     * @return the index info
+     */
+    public Map<String,IndexInfo> getIndexInfo(String indexName) {
 		return this.post(new JsonRpc20.Builder().setMethod("getindexinfo").appendParams(indexName).getJson(), IndexInfo.ResultMap.class);
 	}
 
-	public String signMessageWithPrivKey(String privKey, String message) {
+    /**
+     * Sign message with priv key string.
+     *
+     * @param privKey the priv key
+     * @param message the message
+     * @return the string
+     */
+    public String signMessageWithPrivKey(String privKey, String message) {
 		return this.post(new JsonRpc20.Builder().setMethod("signmessagewithprivkey").appendParams(privKey).appendParams(message).getJson(), StringValue.class);
 	}
 
-	public AddressValidation validateAddress(String address) {
+    /**
+     * Validate address address validation.
+     *
+     * @param address the address
+     * @return the address validation
+     */
+    public AddressValidation validateAddress(String address) {
 		return this.post(new JsonRpc20.Builder().setMethod("validateaddress").appendParams(address).getJson(), AddressValidation.Result.class);
 	}
 
-	public boolean verifyMessage(String address, String signature, String message) {
+    /**
+     * Verify message boolean.
+     *
+     * @param address   the address
+     * @param signature the signature
+     * @param message   the message
+     * @return the boolean
+     */
+    public boolean verifyMessage(String address, String signature, String message) {
 		return this.post(new JsonRpc20.Builder().setMethod("verifymessage").appendParams(address).appendParams(signature).appendParams(message).getJson(), BooleanValue.class);
 	}
 

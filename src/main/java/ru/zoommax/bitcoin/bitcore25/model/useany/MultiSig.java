@@ -4,16 +4,34 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.zoommax.bitcoin.JsonRpcResult;
 
+/**
+ * The type Multi sig.
+ */
 @Getter
 @Setter
 public class MultiSig {
 
-	public static class Result extends JsonRpcResult<MultiSig> {
+    /**
+     * The type Result.
+     */
+    public static class Result extends JsonRpcResult<MultiSig> {
 	}
 
-	private String address;
-	private String redeemScript;
-	private String descriptor;
-	private String[] warnings;
+    /**
+     * The Address.
+     */
+    private String address;
+    /**
+     * The Redeem script.
+     */
+    private String redeemScript;
+    /**
+     * The Descriptor.
+     */
+    private String descriptor;
+    /**
+     * The Warnings.
+     */
+    private String[] warnings;
 
 }
