@@ -89,7 +89,7 @@ public class WalletInfo {
     /**
      * The Scanning.
      */
-    private Scanning scanning;
+    private Object scanning;
     /**
      * The Descriptors.
      */
