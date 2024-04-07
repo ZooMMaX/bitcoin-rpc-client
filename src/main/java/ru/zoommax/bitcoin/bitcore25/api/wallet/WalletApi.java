@@ -865,4 +865,8 @@ public class WalletApi extends JsonRpcClient {
 		return this.post(new JsonRpc20.Builder().setMethod("sendtoaddress").appendParams(address).appendParams(amount).getJson(), StringValue.class);
 	}
 
+	public void sendToAddress(String address, double amount, double fee) {
+		this.post(new JsonRpc20.Builder().setMethod("sendtoaddress").appendParams(address).appendParams(amount).appendParams(fee).getJson(), StringValue.class);
+	}
+
 }
